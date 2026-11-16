@@ -74,6 +74,7 @@ button:focus-visible{outline:3px solid var(--accent-2);outline-offset:2px}
 .how h4{margin:12px 0 4px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
 .how ul,.how ol{margin:0;padding-left:20px}.how li{margin:3px 0}
 .how .ev{color:var(--warn);font-weight:700}
+.ex.frm .body{padding:0 0 10px}.ex.frm .how{margin:0 14px 10px}.rcf{display:block;width:100%;height:1500px;border:0;border-radius:14px;background:transparent}
 </style></head><body><div class="wrap">
 <h1>📅 Rutina semanal</h1>
 <p class="sub">Un apartado por ejercicio. Toca uno para abrirlo y sigue los cronómetros.</p>
@@ -126,13 +127,7 @@ var EX=[
 <p>Toca “＋ Hice una” en cada repetición. <span class="ev">Evita</span> empujar el sonido grave: debe bajar solito, tranquilo.</p>`,g:0,ic:'🌙',t:'Enfriamiento',w:'Mejor en la noche · con nebulizador y suero',
  intro:'Con nebulizador y suero. En cada vocal: aspira y espira en bostezo hacia un sonido grave.',
  st:['E','I','O','U','A'].map(function(v,i){return R((i+1)+'. Vocal /'+v+'/','Aspirar en /'+v+'/ y espirar en bostezo hacia un sonido grave.',5)})},
-{id:'resp',guia:`<h4>Para qué sirve</h4><p>Te enseña a controlar el aire y a soltarlo de forma lenta y pareja, que es la base para hablar sin cansarte. También relaja el cuerpo.</p>
-<h4>Cómo hacerlo</h4><ol><li>Siéntate cómoda, con los hombros sueltos.</li><li>Cuenta mentalmente en segundos mientras sigues el círculo.</li><li><b>Inhala</b> por la nariz, suave. <b>Mantén</b> el aire sin apretar la garganta. <b>Exhala</b> lento por la boca. <b>Pausa</b> con los pulmones sin aire.</li><li>Una serie son 5 repeticiones; descansa y haz 3 series en total.</li><li>En el segundo ejercicio, la exhalación lleva un “zzz” continuo, como una abejita suave y pareja.</li></ol>
-<h4>Ajustar los tiempos</h4><p>Si 5 tiempos te quedan cortos o largos, cámbialos. Muchas personas prefieren exhalar más tiempo (por ejemplo 8). Usa el selector de arriba.</p>
-<p><span class="ev">Si te mareas</span> o sientes ahogo, respira normal y descansa. Nunca fuerces.</p>`,g:1,ic:'🔲',t:'Respiración cuadrada',w:'1 a 2 veces por semana',
- intro:'Cada serie son 5 repeticiones; haz 3 series con descanso entre ellas. Tiempo de exhalación: <span class="adj"><select id="exh"><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select> tiempos</span>. Adáptalo a tu capacidad: debe sentirse cómodo, sin sensación de ahogo.',
- st:[{k:'b',t:'1. Respiración sin sonido',d:'Inhala, mantén, exhala lento y mantén sin aire.',cy:5,se:3,ph:[['Inhala',5],['Mantén el aire',5],['Exhala lentamente',5,1],['Pulmones sin aire',5]]},
-  {k:'b',t:'2. Exhalación con /z/ continuo',d:'Igual, pero exhalando con un sonido /z/ continuo.',cy:5,se:3,ph:[['Inhala',5],['Mantén el aire',5],['Exhala con /z/ continuo',5,1],['Pulmones sin aire',5]]}]},
+{id:'resp',frame:'../respiracion-cuadrada/index.html?embed=1',guia:`<h4>Para qué sirve</h4><p>Calma el cuerpo y ordena tu respiración antes de usar la voz. Dura pocos minutos y el círculo te va guiando.</p><h4>Cómo hacerlo</h4><ol><li>Siéntate cómoda, con la espalda apoyada y los hombros sueltos.</li><li>En la lista “Biblioteca” toca el ejercicio que te indicó tu fonoaudióloga.</li><li>Toca “Iniciar” y sigue el círculo: <b>Inhala</b> por la nariz mientras crece, <b>mantén</b> el aire sin apretar, <b>exhala</b> lento mientras se achica y <b>pausa</b> sin aire.</li><li>Toca “Pausar” cuando lo necesites. Puedes ignorar el “Editor de ejercicio” y los botones Nuevo, Importar y Exportar: son para tu fonoaudióloga.</li></ol><p><span class="ev">Si te mareas</span> o sientes ahogo, respira normal y descansa. Nunca fuerces.</p>`,g:1,ic:'🔲',t:'Respiración cuadrada',w:'1 a 2 veces por semana',intro:'',st:[]},
 {id:'lec',guia:`<h4>Para qué sirve</h4><p>Aprendes a respirar en los momentos correctos mientras hablas, para no quedarte sin aire a mitad de una frase.</p>
 <h4>Cómo hacerlo</h4><ol><li>Bota todo el aire por la boca.</li><li>Inhala lento y profundo por la nariz.</li><li>Lee la línea completa con voz natural y tranquila, en una sola respiración.</li><li>Al llegar al punto final, bota el aire por la boca.</li><li>En la <span class="r">R</span> (de “respira”) toma aire lento por la nariz y recién ahí lee la siguiente línea.</li></ol>
 <p>Toca “✓ Leído” al terminar cada línea. <span class="ev">Evita</span> apurarte: si te falta aire, no pasa nada, la próxima línea será mejor.</p>`,g:1,ic:'📖',t:'Lectura con pausas',w:'1 a 2 veces por semana',
@@ -208,7 +203,7 @@ function row(k){var f=find(k),s=f.s,st=get(k),v='';
  else if(s.k==='g')v='';
  else v=scene(f.e,s);
  return '<h3><i>✓</i>'+s.t+'</h3>'+(s.d?'<p>'+s.d+'</p>':'')+v+'<div id="c-'+k+'">'+ctrl(k)+'</div>'}
-function hdr(i){var e=EX[i],n=0;e.st.forEach(function(s,j){if(DONE[i+'-'+j])n++});
+function hdr(i){var e=EX[i],n=0;if(e.frame){$('x'+i).querySelector('.pg').textContent='';return}e.st.forEach(function(s,j){if(DONE[i+'-'+j])n++});
  var el=$('x'+i);el.classList.toggle('full',n===e.st.length);el.querySelector('.pg').textContent=n+'/'+e.st.length}
 function paint(k){var c=$('c-'+k);if(c)c.innerHTML=ctrl(k);var r=$('r-'+k);if(r){r.classList.toggle('run',!!get(k).run);r.classList.toggle('done',!!DONE[k])}}
 function stopAll(except){for(var k in S){if(k!==except&&S[k].run){S[k].run=0;paint(k)}}}
@@ -235,8 +230,12 @@ function finish(k){var s=get(k);s.run=0;DONE[k]=true;save();beep(2);paint(k);hdr
   var r=$('r-'+nk);if(r)r.scrollIntoView({behavior:'smooth',block:'center'});
   pend=setTimeout(function(){begin(nk)},3000)}}
 function begin(k){var s=get(k),f=find(k);stopAll(k);if(s.left<=0)s.left=f.s.s;s.run=1;s.end=Date.now()+s.left*1000;paint(k);go()}
+function loadFrame(el){var fr=el.querySelector('iframe.rcf');if(!fr||fr.getAttribute('src'))return;
+ fr.addEventListener('load',function(){try{var d=fr.contentDocument,fit=function(){var h=d.documentElement.scrollHeight;if(h>200)fr.style.height=h+'px'};fit();
+  if(window.ResizeObserver)new ResizeObserver(fit).observe(d.body);else setInterval(fit,800)}catch(e){}});
+ fr.src=fr.dataset.src}
 document.addEventListener('click',function(ev){var b=ev.target.closest('button');if(!b)return;
- if(b.classList.contains('hd')){var el=b.parentNode;el.classList.toggle('open');return}
+ if(b.classList.contains('hd')){var el=b.parentNode;el.classList.toggle('open');if(el.classList.contains('open'))loadFrame(el);return}
  var a=b.dataset.a,k=b.dataset.k;if(!a)return;if(a==='go'){try{parent.postMessage({irA:b.dataset.to},'*')}catch(e){}return}clearTimeout(pend);var s=get(k),f=find(k);
  if(a==='tg'){if(s.run){s.run=0;paint(k)}else begin(k)}
  else if(a==='rs'){s.run=0;if(f.s.k==='t')s.left=f.s.s;else s.c=0;delete DONE[k];save();paint(k);hdr(+k.split('-')[0])}
@@ -249,7 +248,7 @@ document.addEventListener('change',function(e){if(e.target.id==='exh'){exh=+e.ta
 var h='',lastG=-1;
 EX.forEach(function(e,i){
  if(e.g!==lastG){h+='<h2 class="grp">'+GN[e.g]+'</h2>';lastG=e.g}
- h+='<section class="ex" id="x'+i+'"><button class="hd" type="button"><span class="ic">'+e.ic+'</span><span class="tt"><b>'+e.t+'</b><small>'+e.w+'</small></span><span class="pg"></span><span class="ch">›</span></button><div class="body"><p class="intro">'+e.intro+'</p>'+(e.guia?'<details class="how"><summary>¿Cómo se hace y para qué sirve?</summary><div class="hb">'+e.guia+'</div></details>':'');
+ h+='<section class="ex'+(e.frame?' frm':'')+'" id="x'+i+'"><button class="hd" type="button"><span class="ic">'+e.ic+'</span><span class="tt"><b>'+e.t+'</b><small>'+e.w+'</small></span><span class="pg"></span><span class="ch">›</span></button><div class="body">'+(e.intro?'<p class="intro">'+e.intro+'</p>':'')+(e.frame?'<iframe class="rcf" id="f'+i+'" data-src="'+e.frame+'" title="'+e.t+'" allow="autoplay; fullscreen"></iframe>':'')+(e.guia?'<details class="how"><summary>¿Cómo se hace y para qué sirve?</summary><div class="hb">'+e.guia+'</div></details>':'');
  e.st.forEach(function(s,j){var k=i+'-'+j;h+='<div class="row'+(DONE[k]?' done':'')+'" id="r-'+k+'">'+row(k)+'</div>'});
  h+='</div></section>'});
 $('list').innerHTML=h;if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches)Array.prototype.forEach.call(document.querySelectorAll('svg.sc'),function(v){try{v.pauseAnimations()}catch(e){}});EX.forEach(function(e,i){hdr(i)});

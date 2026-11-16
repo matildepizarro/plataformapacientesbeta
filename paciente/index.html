@@ -279,11 +279,11 @@ button:focus-visible{outline:3px solid var(--accent-2); outline-offset:2px}
    ===================================================================== */
 var PACIENTES = {
   'michel': { nombre: 'Michel', clave: '1234',
-              modulos: ['rutina', 'respiracion', 'biofeedback', 'sesion'],
+              modulos: ['rutina', 'biofeedback', 'sesion'],
               // ejercicios del Biofeedback que NO se le muestran a este paciente
               ocultarBiofeedback: ['glideDown'] },
   'cari':   { nombre: 'Cari', clave: 'soul',
-              modulos: ['rutinaCari', 'vocales', 'respiracion'],
+              modulos: ['rutinaCari', 'vocales'],
               ocultarBiofeedback: [] }
   // 'ana':  { nombre: 'Ana', clave: 'abcd', modulos: ['respiracion', 'sesion'] },
 };
@@ -445,7 +445,7 @@ var MODULOS = {
         ['📂','Abre un ejercicio','Toca su nombre para desplegarlo. Arriba están los de “A diario” y abajo los “Ocasionales” (1 a 2 veces por semana).'],
         ['⏱️','Cronómetros','Toca “Iniciar”. Al terminar suena un aviso y el paso queda marcado ✓. Si dejas activada la casilla de arriba, el siguiente cronómetro parte solo a los 3 segundos.'],
         ['🔢','Repeticiones','En los ejercicios de vocalización y enfriamiento toca “Hice una” cada vez que completes una repetición.'],
-        ['🫁','Respiración','El contador te dice cuándo inhalar, mantener y exhalar. En Respiración cuadrada puedes ajustar los tiempos de exhalación.'],
+        ['🫁','Respiración','El contador te dice cuándo inhalar, mantener y exhalar. En Respiración cuadrada elige un ejercicio de la “Biblioteca”, toca “Iniciar” y sigue el círculo.'],
         ['🌅','Mañana y noche','Nebulización y Tubo en agua van mejor en la mañana; el Enfriamiento, en la noche.']
       ],
       tips:['Todo debe sentirse suave y cómodo, sin forzar la voz.','Si algo molesta o duele, detente y avísale a tu fonoaudióloga.','Mantente hidratado/a durante el día.']

@@ -66,6 +66,15 @@ button:focus-visible{outline:3px solid var(--accent-2);outline-offset:2px}
 .dd{position:absolute;left:0;top:100%;width:16px;height:16px;border-radius:50%;background:var(--accent-2);transform:translate(-50%,-50%)}
 .loop .ci{animation:breathe 8s ease-in-out infinite}@keyframes breathe{0%,100%{transform:scale(.55)}40%,50%{transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){.sc *,.ci{animation:none!important}}
+.how{margin:0 0 10px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.how>summary{cursor:pointer;padding:11px 14px;font-weight:700;font-size:14px;color:var(--accent);list-style:none;min-height:44px;display:flex;align-items:center;gap:8px}
+.how>summary::-webkit-details-marker{display:none}
+.how>summary::before{content:'💡'}
+.how .hb{padding:0 14px 12px;font-size:14px;line-height:1.55}
+.how h4{margin:12px 0 4px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.how ul,.how ol{margin:0;padding-left:20px}.how li{margin:3px 0}
+.how .ev{color:var(--warn);font-weight:700}
+.ex.frm .body{padding:0 0 10px}.ex.frm .how{margin:0 14px 10px}.rcf{display:block;width:100%;height:1500px;border:0;border-radius:14px;background:transparent}
 </style></head><body><div class="wrap">
 <h1>📅 Rutina semanal</h1>
 <p class="sub">Un apartado por ejercicio. Toca uno para abrirlo y sigue los cronómetros.</p>
@@ -109,10 +118,7 @@ var EX=[
 {id:'esp',g:1,ic:'🫁',t:'Espiración en tubo',w:'1 a 2 veces por semana',
  intro:'Inspira 3 segundos, haz una apnea de 3 segundos y luego usa el tubo con sonido /u/ para espirar todo el aire inhalado. Toca “Terminé” cuando se te acabe el aire.',
  st:[{k:'b',t:'Espiración con /u/',d:'Repite las veces que te indicó tu fonoaudióloga.',free:1,ph:[['Inspira por la nariz',3],['Apnea (sin aire dentro ni fuera: aguanta)',3],['Espira con /u/ en el tubo',0]]}]},
-{id:'resp',g:1,ic:'🔲',t:'Respiración cuadrada',w:'1 a 2 veces por semana',
- intro:'Cada serie son 5 repeticiones; haz 3 series con descanso entre ellas. Tiempo de exhalación: <span class="adj"><select id="exh"><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select> tiempos</span>. Adáptalo a tu capacidad: debe sentirse cómodo, sin sensación de ahogo.',
- st:[{k:'b',t:'1. Respiración sin sonido',d:'Inhala, mantén, exhala lento y mantén sin aire.',cy:5,se:3,ph:[['Inhala',5],['Mantén el aire',5],['Exhala lentamente',5,1],['Pulmones sin aire',5]]},
-  {k:'b',t:'2. Exhalación con /z/ continuo',d:'Igual, pero exhalando con un sonido /z/ continuo.',cy:5,se:3,ph:[['Inhala',5],['Mantén el aire',5],['Exhala con /z/ continuo',5,1],['Pulmones sin aire',5]]}]},
+{id:'resp',frame:'../respiracion-cuadrada/index.html?embed=1',guia:`<h4>Para qué sirve</h4><p>Calma el cuerpo y ordena tu respiración antes de usar la voz. Dura pocos minutos y el círculo te va guiando.</p><h4>Cómo hacerlo</h4><ol><li>Siéntate cómoda, con la espalda apoyada y los hombros sueltos.</li><li>En la lista “Biblioteca” toca el ejercicio que te indicó tu fonoaudióloga.</li><li>Toca “Iniciar” y sigue el círculo: <b>Inhala</b> por la nariz mientras crece, <b>mantén</b> el aire sin apretar, <b>exhala</b> lento mientras se achica y <b>pausa</b> sin aire.</li><li>Toca “Pausar” cuando lo necesites. Puedes ignorar el “Editor de ejercicio” y los botones Nuevo, Importar y Exportar: son para tu fonoaudióloga.</li></ol><p><span class="ev">Si te mareas</span> o sientes ahogo, respira normal y descansa. Nunca fuerces.</p>`,g:1,ic:'🔲',t:'Respiración cuadrada',w:'1 a 2 veces por semana',intro:'',st:[]},
 {id:'lec',g:1,ic:'📖',t:'Lectura con pausas',w:'1 a 2 veces por semana',
  intro:'Bota todo el aire por la boca. Inhala lento y profundo por la nariz. Di la frase completa con respiración cómoda. Al llegar al punto final, vuelve a botar el aire por la boca. En cada <span class="r">R</span> respira lenta y profundamente por la nariz antes de la siguiente línea.',
  st:[{k:'l',t:'Párrafo 1',x:'Cerca del mediodía, recibió una llamada relacionada con una actividad que se realizaría durante los próximos días y tuvo que reorganizar parte de su planificación para incorporar nuevas tareas. Conversó con las personas involucradas, aclaró algunas dudas y propuso una forma más sencilla de distribuir las responsabilidades, de manera que cada integrante pudiera concentrarse en la parte del proceso que le correspondía.'},
@@ -177,7 +183,7 @@ function row(k){var f=find(k),s=f.s,st=get(k),v='';
  else if(s.k==='l')v='<div class="bv loop"><div class="sq"><div class="ci"></div></div><div class="cap">Inhala por la nariz · di la frase · bota el aire</div></div>';
  else v=scene(f.e,s);
  return '<h3><i>✓</i>'+s.t+'</h3>'+(s.d?'<p>'+s.d+'</p>':'')+v+'<div id="c-'+k+'">'+ctrl(k)+'</div>'}
-function hdr(i){var e=EX[i],n=0;e.st.forEach(function(s,j){if(DONE[i+'-'+j])n++});
+function hdr(i){var e=EX[i],n=0;if(e.frame){$('x'+i).querySelector('.pg').textContent='';return}e.st.forEach(function(s,j){if(DONE[i+'-'+j])n++});
  var el=$('x'+i);el.classList.toggle('full',n===e.st.length);el.querySelector('.pg').textContent=n+'/'+e.st.length}
 function paint(k){var c=$('c-'+k);if(c)c.innerHTML=ctrl(k);var r=$('r-'+k);if(r){r.classList.toggle('run',!!get(k).run);r.classList.toggle('done',!!DONE[k])}}
 function stopAll(except){for(var k in S){if(k!==except&&S[k].run){S[k].run=0;paint(k)}}}
@@ -204,8 +210,12 @@ function finish(k){var s=get(k);s.run=0;DONE[k]=true;save();beep(2);paint(k);hdr
   var r=$('r-'+nk);if(r)r.scrollIntoView({behavior:'smooth',block:'center'});
   pend=setTimeout(function(){begin(nk)},3000)}}
 function begin(k){var s=get(k),f=find(k);stopAll(k);if(s.left<=0)s.left=f.s.s;s.run=1;s.end=Date.now()+s.left*1000;paint(k);go()}
+function loadFrame(el){var fr=el.querySelector('iframe.rcf');if(!fr||fr.getAttribute('src'))return;
+ fr.addEventListener('load',function(){try{var d=fr.contentDocument,fit=function(){var h=d.documentElement.scrollHeight;if(h>200)fr.style.height=h+'px'};fit();
+  if(window.ResizeObserver)new ResizeObserver(fit).observe(d.body);else setInterval(fit,800)}catch(e){}});
+ fr.src=fr.dataset.src}
 document.addEventListener('click',function(ev){var b=ev.target.closest('button');if(!b)return;
- if(b.classList.contains('hd')){var el=b.parentNode;el.classList.toggle('open');return}
+ if(b.classList.contains('hd')){var el=b.parentNode;el.classList.toggle('open');if(el.classList.contains('open'))loadFrame(el);return}
  var a=b.dataset.a,k=b.dataset.k;if(!a)return;clearTimeout(pend);var s=get(k),f=find(k);
  if(a==='tg'){if(s.run){s.run=0;paint(k)}else begin(k)}
  else if(a==='rs'){s.run=0;if(f.s.k==='t')s.left=f.s.s;else s.c=0;delete DONE[k];save();paint(k);hdr(+k.split('-')[0])}
@@ -218,7 +228,7 @@ document.addEventListener('change',function(e){if(e.target.id==='exh'){exh=+e.ta
 var h='',lastG=-1;
 EX.forEach(function(e,i){
  if(e.g!==lastG){h+='<h2 class="grp">'+GN[e.g]+'</h2>';lastG=e.g}
- h+='<section class="ex" id="x'+i+'"><button class="hd" type="button"><span class="ic">'+e.ic+'</span><span class="tt"><b>'+e.t+'</b><small>'+e.w+'</small></span><span class="pg"></span><span class="ch">›</span></button><div class="body"><p class="intro">'+e.intro+'</p>';
+ h+='<section class="ex'+(e.frame?' frm':'')+'" id="x'+i+'"><button class="hd" type="button"><span class="ic">'+e.ic+'</span><span class="tt"><b>'+e.t+'</b><small>'+e.w+'</small></span><span class="pg"></span><span class="ch">›</span></button><div class="body">'+(e.intro?'<p class="intro">'+e.intro+'</p>':'')+(e.guia?'<details class="how"><summary>¿Cómo se hace y para qué sirve?</summary><div class="hb">'+e.guia+'</div></details>':'')+(e.frame?'<iframe class="rcf" id="f'+i+'" data-src="'+e.frame+'" title="'+e.t+'" allow="autoplay; fullscreen"></iframe>':'');
  e.st.forEach(function(s,j){var k=i+'-'+j;h+='<div class="row'+(DONE[k]?' done':'')+'" id="r-'+k+'">'+row(k)+'</div>'});
  h+='</div></section>'});
 $('list').innerHTML=h;if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches)Array.prototype.forEach.call(document.querySelectorAll('svg.sc'),function(v){try{v.pauseAnimations()}catch(e){}});EX.forEach(function(e,i){hdr(i)});
