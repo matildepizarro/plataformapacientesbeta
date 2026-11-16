@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Rutina semanal · Cari</title>
+<style>
+:root{--bg:#f6f1fb;--card:#fff;--ink:#2f2a3d;--muted:#7a7390;--accent:#9b7bd9;--accent-2:#e0a5c8;--ok:#4fb894;--line:#e6ddf3;--warn:#f08a6c}
+@media(prefers-color-scheme:dark){:root{--bg:#1d1a28;--card:#272336;--ink:#f0ecfa;--muted:#a9a1c2;--line:#3a3450}}
+*{box-sizing:border-box}
+body{margin:0;padding:14px 14px 40px;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:720px;margin:0 auto}
+h1{font-size:22px;margin:4px 0 2px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 10px}
+.auto{display:flex;gap:8px;align-items:center;font-size:14px;margin:0 0 6px;cursor:pointer}
+.auto input{width:20px;height:20px;accent-color:var(--accent)}
+h2.grp{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:20px 4px 8px}
+.ex{background:var(--card);border:1px solid var(--line);border-radius:18px;margin-bottom:10px;overflow:hidden}
+.ex>button.hd{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+.hd .ic{font-size:26px}.hd .tt{flex:1}.hd b{display:block;font-size:17px}.hd small{color:var(--muted);font-size:13px}
+.hd .pg{font-size:13px;font-weight:700;color:var(--muted)}.ex.full .pg{color:var(--ok)}
+.hd .ch{transition:transform .2s;color:var(--muted)}.ex.open .ch{transform:rotate(90deg)}
+.body{display:none;padding:0 14px 14px}.ex.open .body{display:block}
+.intro{background:color-mix(in srgb,var(--accent) 10%,transparent);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.5;margin:0 0 10px}
+.intro select,.adj select{font:inherit;padding:4px 6px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.row{border:2px solid var(--line);border-radius:14px;padding:12px;margin-bottom:8px}
+.row.done{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 9%,transparent)}
+.row.run{border-color:var(--accent)}
+.row h3{margin:0 0 3px;font-size:16px;display:flex;gap:8px;align-items:center}
+.row h3 i{font-style:normal;color:var(--ok);display:none}.row.done h3 i{display:inline}
+.row p{margin:0 0 10px;font-size:14px;line-height:1.5;color:var(--muted)}
+.big{font-size:40px;font-weight:800;text-align:center;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.lbl{text-align:center;font-weight:700;font-size:17px;margin-bottom:2px}
+.cap{text-align:center;color:var(--muted);font-size:13px;margin:4px 0}
+.bar{height:6px;background:var(--line);border-radius:9px;overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--ok));width:0}
+.btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.b{padding:12px 18px;font:inherit;font-weight:700;font-size:15px;border:0;border-radius:12px;background:var(--accent);color:#fff;cursor:pointer;min-height:46px}
+.b.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.dots{display:flex;gap:8px;justify-content:center;margin:8px 0;flex-wrap:wrap}
+.dots i{width:22px;height:22px;border-radius:50%;border:2px solid var(--line)}.dots i.on{background:var(--ok);border-color:var(--ok)}
+.txt{font-size:15px;line-height:1.6;margin:0 0 10px}
+.r{display:inline-block;background:var(--accent-2);color:#3a1d33;font-weight:800;font-size:12px;padding:2px 8px;border-radius:99px}
+.ph-in{color:#2b8fd0}.ph-hold{color:var(--warn)}.ph-out{color:var(--ok)}
+.note{color:var(--muted);font-size:13px;text-align:center;margin-top:16px}
+button:focus-visible{outline:3px solid var(--accent-2);outline-offset:2px}
+
+.sc{display:block;width:100%;max-width:340px;margin:0 auto 8px}
+.sc .pa{stroke:var(--line);fill:none;stroke-width:5;stroke-linecap:round}.sc .dt{fill:var(--accent)}
+.sc .ax{font-size:9px;fill:var(--muted)}.sc .sine{stroke:var(--accent);fill:none;stroke-width:4;stroke-linecap:round}
+.sc .fr{stroke:var(--line);stroke-width:1.5}
+.sc .pf{fill:#c9bdf0;opacity:0;transform-box:fill-box;transform-origin:center;animation:rise 3s ease-out infinite}
+@keyframes rise{0%{opacity:0;transform:translateY(0) scale(.5)}30%{opacity:.85}100%{opacity:0;transform:translateY(-50px) scale(1.6)}}
+.sc .bb{fill:#fff;stroke:#4a9fd0;stroke-width:1.5;opacity:0;animation:bub 2s ease-in infinite}
+@keyframes bub{0%{opacity:0;transform:translateY(0)}20%{opacity:1}100%{opacity:0;transform:translateY(-24px)}}
+.sc .sw{fill:none;stroke:var(--accent-2);stroke-width:3;stroke-linecap:round;opacity:.2;animation:pul 1.4s ease-in-out infinite}
+@keyframes pul{0%,100%{opacity:.15}50%{opacity:1}}
+.sc .mo{fill:#f08a6c;transform-box:fill-box;transform-origin:center;animation:yaw 3.4s ease-in-out infinite}
+@keyframes yaw{0%,100%{transform:scaleY(.45)}45%{transform:scaleY(1.7)}}
+.sc .be{fill:var(--accent);transform-box:fill-box;transform-origin:center;opacity:.2;animation:pop 1.8s ease-in-out infinite}
+@keyframes pop{0%,45%,100%{opacity:.2;transform:scaleY(.55)}10%,30%{opacity:1;transform:scaleY(1)}}
+.sc .nt{fill:var(--line);animation:lit 4.2s ease-in-out infinite}
+@keyframes lit{0%,14%{fill:var(--accent)}22%,100%{fill:var(--line)}}
+.sc .sl{animation:slide 1.5s linear infinite}@keyframes slide{to{transform:translateX(-40px)}}
+.sq{position:relative;width:130px;height:130px;margin:6px auto;display:grid;place-items:center}
+.sqr{border:3px solid var(--line);border-radius:10px}
+.ci{width:100px;height:100px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#c9bdf0,var(--accent));transform:scale(.55)}
+.dd{position:absolute;left:0;top:100%;width:16px;height:16px;border-radius:50%;background:var(--accent-2);transform:translate(-50%,-50%)}
+.loop .ci{animation:breathe 8s ease-in-out infinite}@keyframes breathe{0%,100%{transform:scale(.55)}40%,50%{transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.sc *,.ci{animation:none!important}}
+.how{margin:0 0 10px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.how>summary{cursor:pointer;padding:11px 14px;font-weight:700;font-size:14px;color:var(--accent);list-style:none;min-height:44px;display:flex;align-items:center;gap:8px}
+.how>summary::-webkit-details-marker{display:none}
+.how>summary::before{content:'💡'}
+.how .hb{padding:0 14px 12px;font-size:14px;line-height:1.55}
+.how h4{margin:12px 0 4px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.how ul,.how ol{margin:0;padding-left:20px}.how li{margin:3px 0}
+.how .ev{color:var(--warn);font-weight:700}
+</style></head><body><div class="wrap">
+<h1>📅 Rutina semanal</h1>
+<p class="sub">Un apartado por ejercicio. Toca uno para abrirlo y sigue los cronómetros.</p>
+<label class="auto"><input type="checkbox" id="auto" checked> Pasar solo al siguiente ejercicio cronometrado (3 s)</label>
+<div id="list"></div>
+<div class="ex open" style="padding:14px 16px;text-align:center"><b style="font-size:18px">💧 Hidrátate</b><p style="margin:6px 0 10px;color:var(--muted);font-size:14px;line-height:1.5">El agua es tu mejor amiga. Bebe suficiente agua durante el día para mantener tus cuerdas vocales bien hidratadas.</p><b style="color:var(--accent)">Mi voz es válida · Me escucho y me cuido · Mi voz se fortalece cada día</b></div>
+<p class="note">Todo debe sentirse suave y cómodo. Si algo molesta o duele, detente y avísale a tu fonoaudióloga.</p>
+</div>
+<script>
+(function(){
+var T=function(t,d,s){return{k:'t',t:t,d:d,s:s||120}};
+var R=function(t,d,n){return{k:'r',t:t,d:d,n:n}};
+var X=function(w){return{k:'b',t:w,d:'Sigue las indicaciones del cronómetro.',cy:5,se:3}};
+var EX=[
+{id:'nebu',guia:`<h4>Para qué sirve</h4><p>El vapor tibio humedece la garganta y las cuerdas vocales. Mientras tanto haces sonidos suaves con /b/ (labios juntos), que ayudan a que la voz salga con poco esfuerzo. Es el calentamiento de tu voz.</p>
+<h4>Antes de empezar</h4><ul><li>Prepara el nebulizador con el suero que te indicó tu fonoaudióloga.</li><li>Siéntate con la espalda apoyada y los hombros sueltos.</li><li>Respira tranquila: aire por la nariz y suéltalo por la boca junto con el vapor.</li></ul>
+<h4>Cómo hacerlo</h4><ol><li><b>Solo vapor:</b> respira normal, sin voz, para acostumbrarte.</li><li><b>/b/ sostenida:</b> labios juntos y suaves, un sonido “bbb” parejo y largo, con un cosquilleo suave en los labios.</li><li><b>/b/ entrecortada:</b> “b‑b‑b‑b”, golpecitos cortos con pausas, siempre suaves.</li><li><b>/b/ ascendente:</b> empieza en un tono grave y sube despacio, como una rampa. Arriba, mantén 1 o 2 segundos y vuelve a empezar.</li><li><b>/b/ en sirena:</b> sube y baja sin cortes, como una ambulancia lejana.</li><li><b>/b/ en espiral:</b> desliza la voz por distintas alturas, subiendo y bajando de forma ondulada, sin saltos bruscos.</li><li><b>Solo vapor:</b> termina en silencio, respirando tranquila.</li></ol>
+<h4>Qué deberías sentir</h4><p>Labios relajados, garganta cómoda y voz suave. <span class="ev">Evita:</span> apretar los labios, subir demasiado agudo o forzar el sonido.</p>`,g:0,ic:'🌫️',t:'Nebulización',w:'Mejor en la mañana · 2 min por ejercicio',
+ intro:'Realiza los ejercicios durante 2 minutos cada uno, en el orden indicado.',
+ st:[T('1. Solo vapor','Nebuliza sin producir sonidos.'),
+  T('2. /b/ sostenida','Sonido /b/ continuo, suave y vibrante, de forma cómoda.'),
+  T('3. /b/ entrecortada','Sonido /b/ de manera entrecortada y controlada.'),
+  T('4. /b/ ascendente','Desliza desde un tono grave hacia uno agudo. Al llegar al agudo, mantenlo brevemente.'),
+  T('5. /b/ en sirena','Deslizamientos continuos de grave a agudo y de nuevo a grave, como una sirena.'),
+  T('6. /b/ en espiral','Deslizamientos de tono progresivos, recorriendo diferentes alturas de forma continua y controlada.'),
+  T('7. Solo vapor','Finaliza con 2 minutos de vapor sin producir sonidos.')]},
+{id:'tubo',guia:`<h4>Para qué sirve</h4><p>Al soplar por el tubo dentro del agua se forman burbujas que crean una pequeña resistencia. Eso masajea suavemente las cuerdas vocales y hace que la voz salga más fácil y sin esfuerzo.</p>
+<h4>Preparación</h4><ul><li>Llena la botella con unos <b>4 dedos de agua</b>.</li><li>Pon el tubo dentro del agua solo hasta <b>2 dedos</b> de profundidad. Más hondo cuesta más soplar.</li><li>Sujeta la botella firme y cierra los labios alrededor del tubo sin apretar.</li></ul>
+<h4>Cómo hacerlo</h4><ol><li><b>Solo burbujas:</b> sopla despacio y parejo. Deben salir burbujas pequeñas y regulares.</li><li><b>/u/ sostenida:</b> haz sonar una “uuu” larga y suave mientras salen las burbujas.</li><li><b>/u/ entrecortada:</b> “u‑u‑u‑u”, golpecitos cortos, con las burbujas siguiendo el ritmo.</li><li><b>/u/ ascendente:</b> sube la voz de grave a agudo como una rampa, mantén un momento arriba y baja con calma.</li><li><b>/u/ en sirena:</b> sube y baja de forma continua, como una sirena.</li><li><b>Solo burbujas:</b> termina sin voz, con burbujas suaves.</li></ol>
+<h4>Qué deberías sentir</h4><p>Burbujas suaves y constantes, mejillas y cuello relajados. <span class="ev">Evita:</span> soplar fuerte, que el agua salpique o hundir más el tubo.</p>`,g:0,ic:'💧',t:'Tubo en agua',w:'Mejor en la mañana · 2 min por ejercicio',
+ intro:'Antes de comenzar, llena la botella con aproximadamente <b>4 dedos de agua</b>. Introduce el tubo <b>solo hasta 2 dedos</b> de profundidad (no más). Busca burbujas suaves y regulares, sin soplar con fuerza.',
+ st:[T('1. Solo burbujas','Sopla suavemente por el tubo, burbujas continuas y cómodas.'),
+  T('2. /u/ sostenida','Sonido /u/ continuo y suave a través del tubo, emisión cómoda.'),
+  T('3. /u/ entrecortada','Sonido /u/ entrecortado y controlado a través del tubo.'),
+  T('4. /u/ ascendente','Desliza de un tono grave a uno agudo; al llegar, mantenlo brevemente antes de descender.'),
+  T('5. /u/ en sirena','Deslizamientos continuos de grave a agudo y de nuevo a grave, como una sirena.'),
+  T('6. Solo burbujas','Finaliza con 2 minutos de burbujas suaves y continuas, sin voz.')]},
+{id:'voc',guia:`<h4>Para qué sirve</h4><p>La /m/ con la boca cerrada hace vibrar la voz de forma suave y cómoda. Es una manera fácil de ejercitar la voz sin cansarla.</p>
+<h4>Cómo hacer la /m/</h4><ul><li>Labios juntos pero sueltos, dientes separados y lengua relajada.</li><li>Deberías sentir un cosquilleo en los labios o la nariz: esa es la señal de que va bien.</li></ul>
+<h4>Cómo hacerlo</h4><ol><li><b>/m/ sostenida:</b> “mmm” largo, parejo y cómodo. 5 veces.</li><li><b>/m/ entrecortada:</b> “m‑m‑m‑m” breve, con ritmo tranquilo. 5 veces.</li><li><b>/m/ en sirena:</b> de grave a agudo y de vuelta a grave, sin cortes. 5 veces.</li><li><b>/m/ ascendente:</b> sube de a poco de un tono grave a uno agudo. 5 veces.</li><li><b>“Cumpleaños feliz”:</b> tararea la melodía con la /m/. Repítela 2 veces.</li></ol>
+<p>Toca “＋ Hice una” cada vez que completes una repetición. <span class="ev">Evita</span> forzar la voz: si el tono es muy agudo, empieza un poco más abajo.</p>`,g:0,ic:'🎵',t:'Vocalización',w:'Repeticiones con /m/',
+ intro:'Realiza los ejercicios en el orden indicado. Que el sonido sea suave, cómodo y sin forzar la voz.',
+ st:[R('1. /m/ sostenida','Sonido /m/ continuo, suave y cómodo.',5),
+  R('2. /m/ entrecortada','Sonido /m/ breve y entrecortado, con un ritmo cómodo.',5),
+  R('3. /m/ en sirena','Deslizamientos de grave a agudo y de nuevo a grave, como una sirena.',5),
+  R('4. /m/ ascendente','Deslizamiento progresivo de un tono grave a uno agudo.',5),
+  R('5. /m/ con “Cumpleaños feliz”','Sonido /m/ siguiendo la melodía de “Cumpleaños feliz”.',2)]},
+{id:'enf',guia:`<h4>Para qué sirve</h4><p>Es la relajación final del día: el vapor del suero y el bostezo sueltan la garganta y dejan la voz descansada. Por eso va mejor en la noche.</p>
+<h4>Cómo hacerlo (en cada vocal)</h4><ol><li>Con el nebulizador y el suero, toma aire por la boca con la forma de la vocal (E, I, O, U, A).</li><li>Suelta el aire como un bostezo suave: la garganta se abre y la voz baja sola hacia un sonido grave y relajado.</li><li>Haz esto 5 veces con cada vocal, en este orden: E, I, O, U, A.</li></ol>
+<p>Toca “＋ Hice una” en cada repetición. <span class="ev">Evita</span> empujar el sonido grave: debe bajar solito, tranquilo.</p>`,g:0,ic:'🌙',t:'Enfriamiento',w:'Mejor en la noche · con nebulizador y suero',
+ intro:'Con nebulizador y suero. En cada vocal: aspira y espira en bostezo hacia un sonido grave.',
+ st:['E','I','O','U','A'].map(function(v,i){return R((i+1)+'. Vocal /'+v+'/','Aspirar en /'+v+'/ y espirar en bostezo hacia un sonido grave.',5)})},
+{id:'resp',guia:`<h4>Para qué sirve</h4><p>Te enseña a controlar el aire y a soltarlo de forma lenta y pareja, que es la base para hablar sin cansarte. También relaja el cuerpo.</p>
+<h4>Cómo hacerlo</h4><ol><li>Siéntate cómoda, con los hombros sueltos.</li><li>Cuenta mentalmente en segundos mientras sigues el círculo.</li><li><b>Inhala</b> por la nariz, suave. <b>Mantén</b> el aire sin apretar la garganta. <b>Exhala</b> lento por la boca. <b>Pausa</b> con los pulmones sin aire.</li><li>Una serie son 5 repeticiones; descansa y haz 3 series en total.</li><li>En el segundo ejercicio, la exhalación lleva un “zzz” continuo, como una abejita suave y pareja.</li></ol>
+<h4>Ajustar los tiempos</h4><p>Si 5 tiempos te quedan cortos o largos, cámbialos. Muchas personas prefieren exhalar más tiempo (por ejemplo 8). Usa el selector de arriba.</p>
+<p><span class="ev">Si te mareas</span> o sientes ahogo, respira normal y descansa. Nunca fuerces.</p>`,g:1,ic:'🔲',t:'Respiración cuadrada',w:'1 a 2 veces por semana',
+ intro:'Cada serie son 5 repeticiones; haz 3 series con descanso entre ellas. Tiempo de exhalación: <span class="adj"><select id="exh"><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select> tiempos</span>. Adáptalo a tu capacidad: debe sentirse cómodo, sin sensación de ahogo.',
+ st:[{k:'b',t:'1. Respiración sin sonido',d:'Inhala, mantén, exhala lento y mantén sin aire.',cy:5,se:3,ph:[['Inhala',5],['Mantén el aire',5],['Exhala lentamente',5,1],['Pulmones sin aire',5]]},
+  {k:'b',t:'2. Exhalación con /z/ continuo',d:'Igual, pero exhalando con un sonido /z/ continuo.',cy:5,se:3,ph:[['Inhala',5],['Mantén el aire',5],['Exhala con /z/ continuo',5,1],['Pulmones sin aire',5]]}]},
+{id:'lec',guia:`<h4>Para qué sirve</h4><p>Aprendes a respirar en los momentos correctos mientras hablas, para no quedarte sin aire a mitad de una frase.</p>
+<h4>Cómo hacerlo</h4><ol><li>Bota todo el aire por la boca.</li><li>Inhala lento y profundo por la nariz.</li><li>Lee la línea completa con voz natural y tranquila, en una sola respiración.</li><li>Al llegar al punto final, bota el aire por la boca.</li><li>En la <span class="r">R</span> (de “respira”) toma aire lento por la nariz y recién ahí lee la siguiente línea.</li></ol>
+<p>Toca “✓ Leído” al terminar cada línea. <span class="ev">Evita</span> apurarte: si te falta aire, no pasa nada, la próxima línea será mejor.</p>`,g:1,ic:'📖',t:'Lectura con pausas',w:'1 a 2 veces por semana',
+ intro:'Bota todo el aire por la boca. Inhala lento y profundo por la nariz. Di la frase completa con respiración cómoda. Al llegar al punto final, vuelve a botar el aire por la boca. En cada <span class="r">R</span> respira lenta y profundamente por la nariz antes de decir la siguiente línea.',
+ st:[{k:'l',t:'Línea 1',x:'Durante la mañana, Matías salió de su casa con tiempo suficiente para llegar tranquilo a su trabajo.'},
+  {k:'l',t:'Línea 2',x:'El día estaba despejado y corría una brisa suave que hacía agradable caminar por la calle.'},
+  {k:'l',t:'Línea 3',x:'Mientras avanzaba, observó que varias personas se dirigían hacia sus actividades habituales.'},
+  {k:'l',t:'Línea 4',x:'Algunas caminaban rápidamente, mientras otras parecían disfrutar de la tranquilidad de las primeras horas del día.'},
+  {k:'l',t:'Línea 5',x:'Al llegar a una pequeña plaza, decidió detenerse unos minutos antes de continuar.'},
+  {k:'l',t:'Línea 6',x:'Se sentó en una banca y observó los árboles que se movían lentamente con el viento.'}]},
+{id:'esp',guia:`<h4>Para qué sirve</h4><p>Entrena a soltar todo el aire de forma controlada usando el tubo y el sonido /u/, que ayuda a que la voz sea más suave y estable.</p>
+<h4>Cómo hacerlo</h4><ol><li><b>Inspira</b> por la nariz durante 3 segundos.</li><li><b>Apnea:</b> aguanta el aire 3 segundos, sin apretar la garganta.</li><li>Pon el tubo en la boca y <b>espira</b> con un sonido “uuu” suave hasta soltar todo el aire que tomaste.</li><li>Toca “Terminé” cuando se acabe el aire y repite las veces que te indicó tu fonoaudióloga.</li></ol>
+<p><span class="ev">Evita</span> soplar fuerte o seguir cuando ya no queda aire.</p>`,g:1,ic:'🫁',t:'Espiración en tubo',w:'1 a 2 veces por semana',
+ intro:'Inspira 3 segundos, haz una apnea de 3 segundos y luego usa el tubo con sonido /u/ para espirar todo el aire inhalado. Toca “Terminé” cuando se te acabe el aire.',
+ st:[{k:'b',t:'Espiración con /u/',d:'Repite las veces que te indicó tu fonoaudióloga.',free:1,ph:[['Inspira por la nariz',3],['Apnea (sin aire dentro ni fuera: aguanta)',3],['Espira con /u/ en el tubo',0]]}]}
+];
+var GN=['A diario','Ocasionales · 1 a 2 veces por semana'];
+var $=function(i){return document.getElementById(i)};
+function hoy(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+var DK='rutina-cari-hecho-'+hoy(),DONE={};
+try{DONE=JSON.parse(localStorage.getItem(DK)||'{}')}catch(e){}
+function save(){try{localStorage.setItem(DK,JSON.stringify(DONE))}catch(e){}}
+var S={},tick=null,exh=5,ac=null,pend=null;
+function beep(n){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();for(var i=0;i<(n||1);i++){var o=ac.createOscillator(),g=ac.createGain();o.frequency.value=880;g.gain.value=.15;o.connect(g);g.connect(ac.destination);o.start(ac.currentTime+i*.28);o.stop(ac.currentTime+i*.28+.18)}}catch(e){}if(navigator.vibrate)try{navigator.vibrate(n>1?[200,100,200]:120)}catch(e){}}
+function fmt(s){return('0'+Math.floor(s/60)).slice(-2)+':'+('0'+s%60).slice(-2)}
+function find(k){var p=k.split('-');return{e:EX[+p[0]],s:EX[+p[0]].st[+p[1]]}}
+function get(k){if(S[k])return S[k];var s=find(k).s;
+ return S[k]=s.k==='t'?{left:s.s,run:0}:s.k==='r'?{c:0}:s.k==='g'?{}:s.k==='b'?{i:-1,run:0,cy:0,se:0,rest:0,left:0}:{}}
+function phases(k){var s=find(k).s;return s.ph||[['Inhala',5]]}
+function pdur(p){return p[2]?exh:p[1]}
+function ctrl(k){var f=find(k),s=f.s,st=get(k),h='';
+ if(s.k==='t'){var pc=100-st.left/s.s*100;
+  h='<div class="big">'+fmt(st.left)+'</div><div class="bar"><i style="width:'+pc+'%"></i></div><div class="btns"><button class="b" data-a="tg" data-k="'+k+'">'+(st.run?'⏸ Pausar':(st.left<s.s?'▶ Continuar':'▶ Iniciar'))+'</button><button class="b alt" data-a="rs" data-k="'+k+'">↺</button></div>'}
+ else if(s.k==='r'){h='<div class="dots">';for(var i=0;i<s.n;i++)h+='<i class="'+(i<st.c?'on':'')+'"></i>';
+  h+='</div><div class="cap">'+st.c+' de '+s.n+' repeticiones</div><div class="btns"><button class="b" data-a="rp" data-k="'+k+'">＋ Hice una</button><button class="b alt" data-a="rs" data-k="'+k+'">↺</button></div>'}
+ else if(s.k==='l'){h='<p class="txt">'+s.x+' <span class="r">R</span></p><div class="btns"><button class="b" data-a="ok" data-k="'+k+'">✓ Leído</button></div>'}
+ else{var P=phases(k),ph=P[st.i];
+  if(st.rest){h='<div class="lbl">☕ Descansa</div><div class="cap">Serie '+st.se+' de '+s.se+' terminada</div><div class="btns"><button class="b" data-a="bs" data-k="'+k+'">▶ Empezar serie '+(st.se+1)+'</button></div>'}
+  else if(st.i<0){h='<div class="cap">'+(s.free?'Repeticiones hechas: '+st.cy:'Serie '+(st.se+1)+' de '+s.se+' · '+s.cy+' repeticiones')+'</div><div class="btns"><button class="b" data-a="bs" data-k="'+k+'">▶ Iniciar</button>'+(s.free&&st.cy?'<button class="b alt" data-a="bx" data-k="'+k+'">■ Terminar</button>':'')+'</div>'}
+  else{var cls=st.i===0?'ph-in':(ph[2]||!ph[1]?'ph-out':'ph-hold');
+   h='<div class="lbl '+cls+'">'+ph[0]+'</div><div class="big">'+(pdur(ph)?st.left:fmt(st.left))+'</div>';
+   h+=pdur(ph)?'<div class="bar"><i style="width:'+(100-st.left/pdur(ph)*100)+'%"></i></div>':'<div class="cap">Cuenta en segundos</div>';
+   h+='<div class="cap">'+(s.free?'Repetición '+(st.cy+1):'Repetición '+(st.cy+1)+' de '+s.cy+' · Serie '+(st.se+1)+' de '+s.se)+'</div><div class="btns">'+(pdur(ph)?'':'<button class="b" data-a="nx" data-k="'+k+'">✓ Terminé</button>')+'<button class="b alt" data-a="bx" data-k="'+k+'">■ Detener</button></div>'}}
+ return h}
+
+var DT='<circle class="dt" r="7">';
+function mot(path,kp){return DT+'<animateMotion dur="4s" repeatCount="indefinite" path="'+path+'"'+(kp?' calcMode="linear" keyPoints="'+kp[0]+'" keyTimes="'+kp[1]+'"':'')+'/></circle>'}
+function fr(){return '<line class="fr" x1="110" y1="100" x2="290" y2="100"/><text class="ax" x="290" y="12" text-anchor="end">agudo</text><text class="ax" x="112" y="109">grave</text>'}
+function pitch(t,enf){
+ if(enf){var d='M115 25 Q 200 25 285 88';return fr()+'<path class="pa" d="'+d+'"/>'+mot(d,['0;1;1','0;.8;1'])}
+ if(/sostenida/.test(t)){var q='';for(var i=0;i<6;i++)q+='q10 -14 20 0 t20 0';
+  return fr()+'<clipPath id="cp"><rect x="110" y="20" width="180" height="70"/></clipPath><g clip-path="url(#cp)"><path class="sine sl" d="M70 55'+q+'"/></g>'}
+ if(/entrecortada/.test(t)){var r='';for(var j=0;j<6;j++)r+='<rect class="be" x="'+(118+j*28)+'" y="38" width="16" height="34" rx="8" style="animation-delay:'+(j*.3)+'s"/>';return fr()+r}
+ if(/ascendente/.test(t)){var a='M115 92 Q 200 85 250 20 L 285 20';return fr()+'<path class="pa" d="'+a+'"/>'+mot(a,['0;1;1','0;.8;1'])}
+ if(/sirena/.test(t)){var b='M115 92 Q 200 -20 285 92';return fr()+'<path class="pa" d="'+b+'"/>'+mot(b,['0;1;0','0;.5;1'])}
+ if(/espiral/.test(t)){var c='';for(var u=0;u<=12.6;u+=.3){var rr=4+u*3;c+=(u?'L':'M')+(200+rr*Math.cos(u)).toFixed(1)+' '+(55+rr*.7*Math.sin(u)).toFixed(1)}return fr()+'<path class="pa" d="'+c+'"/>'+mot(c)}
+ if(/Cumplea/.test(t)){var Y=[75,75,62,75,35,48],o='<polyline class="pa" style="stroke-width:2" points="';Y.forEach(function(y,i){o+=(125+i*32)+','+y+' '});o+='"/>';Y.forEach(function(y,i){o+='<circle class="nt" r="7" cx="'+(125+i*32)+'" cy="'+y+'" style="animation-delay:'+(i*.6)+'s"/>'});return fr()+o}
+ return '<text class="ax" x="200" y="58" text-anchor="middle" style="font-size:12px">sin voz</text>'}
+function left(e,t){
+ if(e.id==='nebu'){var o='<rect x="28" y="80" width="44" height="22" rx="7" fill="#9b7bd9"/><rect x="40" y="72" width="20" height="10" fill="#b58ee6"/>';for(var i=0;i<5;i++)o+='<circle class="pf" r="9" cx="'+(38+i*6)+'" cy="64" style="animation-delay:'+(i*.6)+'s"/>';return o}
+ if(e.id==='tubo'){var o='<rect x="24" y="30" width="48" height="72" rx="8" fill="none" stroke="#7a7390" stroke-width="3"/><rect x="26" y="62" width="44" height="38" rx="6" fill="#7ec8f0" opacity=".55"/><path d="M68 6 L68 24 L50 84" stroke="#e0a5c8" stroke-width="5" fill="none" stroke-linecap="round"/>';for(var i=0;i<4;i++)o+='<circle class="bb" r="3.5" cx="'+(44+(i%2)*8)+'" cy="82" style="animation-delay:'+(i*.5)+'s"/>';return o}
+ if(e.id==='voc'){var o='<path d="M26 55 Q50 38 74 55 Q50 76 26 55z" fill="#f08a6c"/><path d="M26 55 Q50 62 74 55" stroke="#7a3a2e" stroke-width="2" fill="none"/>';for(var i=0;i<3;i++)o+='<path class="sw" d="M'+(82+i*8)+' '+(42-i*3)+' q'+(8+i*2)+' '+(13+i*3)+' 0 '+(26+i*6)+'" style="animation-delay:'+(i*.25)+'s"/>';return o}
+ var v=(t.match(/\/([A-Z])\//)||[])[1]||'';return '<text x="50" y="30" text-anchor="middle" font-size="24" font-weight="800" fill="#9b7bd9">'+v+'</text><ellipse class="mo" cx="50" cy="66" rx="20" ry="14"/>'}
+function scene(e,s){var enf=e.id==='enf',sil=/Solo/.test(s.t);
+ return '<svg class="sc" viewBox="0 0 300 110" role="img" aria-label="Animación: '+s.t+'">'+left(e,s.t)+(sil?'<text class="ax" x="200" y="58" text-anchor="middle" style="font-size:12px">sin voz · solo '+(e.id==='nebu'?'vapor':'burbujas')+'</text>':pitch(s.t,enf))+'</svg>'}
+function bvis(k,i){var c=$('ci-'+k);if(!c)return;var s=get(k),P=phases(k),ph=P[i],d=pdur(ph)||8,ex=ph[2]||!ph[1];
+ var t=i===0?1:(ex?.55:s.sc||1);s.sc=t;c.style.transition=(i===0||ex)?'transform '+d+'s linear':'none';c.style.transform='scale('+t+')';
+ var dd=$('dd-'+k);if(dd){var X=[[0,100,0,0],[0,0,100,0],[100,0,100,100],[100,100,0,100]][i];dd.style.transition='none';dd.style.left=X[0]+'%';dd.style.top=X[1]+'%';void dd.offsetWidth;dd.style.transition='left '+d+'s linear,top '+d+'s linear';dd.style.left=X[2]+'%';dd.style.top=X[3]+'%'}}
+function breset(k){var c=$('ci-'+k);if(c){c.style.transition='transform .5s';c.style.transform='scale(.55)'}var d=$('dd-'+k);if(d){d.style.transition='none';d.style.left='0%';d.style.top='100%'}}
+function row(k){var f=find(k),s=f.s,st=get(k),v='';
+ if(s.k==='b'){var P4=phases(k).length===4;v='<div class="bv"><div class="sq'+(P4?' sqr':'')+'"><div class="ci" id="ci-'+k+'"></div>'+(P4?'<i class="dd" id="dd-'+k+'"></i>':'')+'</div></div>'}
+ else if(s.k==='l')v='<div class="bv loop"><div class="sq"><div class="ci"></div></div><div class="cap">Inhala por la nariz · di la frase · bota el aire</div></div>';
+ else if(s.k==='g')v='';
+ else v=scene(f.e,s);
+ return '<h3><i>✓</i>'+s.t+'</h3>'+(s.d?'<p>'+s.d+'</p>':'')+v+'<div id="c-'+k+'">'+ctrl(k)+'</div>'}
+function hdr(i){var e=EX[i],n=0;e.st.forEach(function(s,j){if(DONE[i+'-'+j])n++});
+ var el=$('x'+i);el.classList.toggle('full',n===e.st.length);el.querySelector('.pg').textContent=n+'/'+e.st.length}
+function paint(k){var c=$('c-'+k);if(c)c.innerHTML=ctrl(k);var r=$('r-'+k);if(r){r.classList.toggle('run',!!get(k).run);r.classList.toggle('done',!!DONE[k])}}
+function stopAll(except){for(var k in S){if(k!==except&&S[k].run){S[k].run=0;paint(k)}}}
+function go(){if(!tick)tick=setInterval(loop,200)}
+function loop(){var any=0,now=Date.now();
+ for(var k in S){var s=S[k];if(!s.run)continue;any=1;var f=find(k);
+  if(f.s.k==='t'){var l=Math.max(0,Math.ceil((s.end-now)/1000));if(l!==s.left){s.left=l;paint(k)}if(now>=s.end){s.run=0;s.left=0;finish(k)}}
+  else{var ph=phases(k)[s.i];if(pdur(ph)){var l2=Math.max(0,Math.ceil((s.end-now)/1000));if(l2!==s.left){s.left=l2;paint(k)}if(now>=s.end)nextPh(k)}
+   else{var u=Math.floor((now-s.t0)/1000);if(u!==s.left){s.left=u;paint(k)}}}}
+ if(!any){clearInterval(tick);tick=null}}
+function setPh(k,i){var s=get(k),ph=phases(k)[i];s.i=i;s.run=1;s.t0=Date.now();bvis(k,i);
+ if(pdur(ph)){s.left=pdur(ph);s.end=s.t0+s.left*1000}else s.left=0;paint(k);go()}
+function nextPh(k){var s=get(k),f=find(k),P=phases(k);
+ if(s.i<P.length-1){beep(1);return setPh(k,s.i+1)}
+ s.cy++;
+ if(f.s.free){beep(1);return setPh(k,0)}
+ if(s.cy<f.s.cy){beep(1);return setPh(k,0)}
+ s.cy=0;s.se++;s.run=0;
+ if(s.se>=f.s.se){s.i=-1;s.se=0;breset(k);return finish(k)}
+ s.i=-1;s.rest=1;breset(k);beep(2);paint(k)}
+function finish(k){var s=get(k);s.run=0;DONE[k]=true;save();beep(2);paint(k);hdr(+k.split('-')[0]);
+ var p=k.split('-'),n=find(k).e.st[+p[1]+1];
+ if(n&&n.k==='t'&&$('auto').checked){var nk=p[0]+'-'+(+p[1]+1);clearTimeout(pend);
+  var r=$('r-'+nk);if(r)r.scrollIntoView({behavior:'smooth',block:'center'});
+  pend=setTimeout(function(){begin(nk)},3000)}}
+function begin(k){var s=get(k),f=find(k);stopAll(k);if(s.left<=0)s.left=f.s.s;s.run=1;s.end=Date.now()+s.left*1000;paint(k);go()}
+document.addEventListener('click',function(ev){var b=ev.target.closest('button');if(!b)return;
+ if(b.classList.contains('hd')){var el=b.parentNode;el.classList.toggle('open');return}
+ var a=b.dataset.a,k=b.dataset.k;if(!a)return;if(a==='go'){try{parent.postMessage({irA:b.dataset.to},'*')}catch(e){}return}clearTimeout(pend);var s=get(k),f=find(k);
+ if(a==='tg'){if(s.run){s.run=0;paint(k)}else begin(k)}
+ else if(a==='rs'){s.run=0;if(f.s.k==='t')s.left=f.s.s;else s.c=0;delete DONE[k];save();paint(k);hdr(+k.split('-')[0])}
+ else if(a==='rp'){if(s.c<f.s.n){s.c++;if(s.c>=f.s.n){DONE[k]=true;save();beep(2);hdr(+k.split('-')[0])}paint(k)}}
+ else if(a==='ok'){DONE[k]=!DONE[k];save();b.textContent=DONE[k]?'✓ Leído':'✓ Leído';paint(k);hdr(+k.split('-')[0])}
+ else if(a==='bs'){stopAll(k);s.rest=0;if(s.i<0&&!s.cy)s.cy=0;setPh(k,0)}
+ else if(a==='nx'){nextPh(k)}
+ else if(a==='bx'){s.run=0;if(f.s.free&&s.cy){DONE[k]=true;save();hdr(+k.split('-')[0])}s.i=-1;s.cy=0;s.se=0;s.rest=0;breset(k);paint(k)}});
+document.addEventListener('change',function(e){if(e.target.id==='exh'){exh=+e.target.value}});
+var h='',lastG=-1;
+EX.forEach(function(e,i){
+ if(e.g!==lastG){h+='<h2 class="grp">'+GN[e.g]+'</h2>';lastG=e.g}
+ h+='<section class="ex" id="x'+i+'"><button class="hd" type="button"><span class="ic">'+e.ic+'</span><span class="tt"><b>'+e.t+'</b><small>'+e.w+'</small></span><span class="pg"></span><span class="ch">›</span></button><div class="body"><p class="intro">'+e.intro+'</p>'+(e.guia?'<details class="how"><summary>¿Cómo se hace y para qué sirve?</summary><div class="hb">'+e.guia+'</div></details>':'');
+ e.st.forEach(function(s,j){var k=i+'-'+j;h+='<div class="row'+(DONE[k]?' done':'')+'" id="r-'+k+'">'+row(k)+'</div>'});
+ h+='</div></section>'});
+$('list').innerHTML=h;if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches)Array.prototype.forEach.call(document.querySelectorAll('svg.sc'),function(v){try{v.pauseAnimations()}catch(e){}});EX.forEach(function(e,i){hdr(i)});
+})();
+</script></body></html>

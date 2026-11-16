@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Ejercicios vocales</title>
+<style>
+:root{--bg:#f6f1fb;--card:#fff;--ink:#2f2a3d;--muted:#7a7390;--accent:#9b7bd9;--accent-2:#e0a5c8;--ok:#4fb894;--line:#e6ddf3}
+@media(prefers-color-scheme:dark){:root{--bg:#1d1a28;--card:#272336;--ink:#f0ecfa;--muted:#a9a1c2;--line:#3a3450}}
+*{box-sizing:border-box}
+body{margin:0;padding:14px 14px 40px;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:720px;margin:0 auto}
+h1{font-size:22px;margin:4px 0 2px}.sub{color:var(--muted);font-size:14px;margin:0 0 12px}
+.tono{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin-bottom:12px}
+.tono b{display:block;font-size:15px;margin-bottom:8px}
+.seg{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg button{flex:1;min-width:90px;padding:11px 8px;font:inherit;font-weight:700;font-size:14px;border-radius:12px;border:2px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.seg button.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent)}
+.seg .fine{flex:none;min-width:44px;font-size:18px}
+.nota{font-size:14px;color:var(--muted);margin-top:8px}.nota b{display:inline;color:var(--ink)}
+h2.grp{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:18px 4px 8px}
+.ex{background:var(--card);border:1px solid var(--line);border-radius:18px;margin-bottom:10px;overflow:hidden}
+.ex>button.hd{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+.hd .tt{flex:1}.hd b{display:block;font-size:17px}.hd small{color:var(--muted);font-size:13px}
+.hd .pg{font-size:13px;font-weight:700;color:var(--muted)}.ex.full .pg{color:var(--ok)}
+.hd .ch{transition:transform .2s;color:var(--muted)}.ex.open .ch{transform:rotate(90deg)}
+.body{display:none;padding:0 14px 14px}.ex.open .body{display:block}
+.row{border:2px solid var(--line);border-radius:14px;padding:12px;margin-bottom:8px}
+.row.done{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 9%,transparent)}
+.row.run{border-color:var(--accent)}
+.row h3{margin:0 0 3px;font-size:16px}.row p{margin:0 0 8px;font-size:14px;line-height:1.5;color:var(--muted)}
+.pills{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+.pills span{min-width:42px;text-align:center;padding:7px 8px;border-radius:99px;border:2px solid var(--line);font-weight:700;font-size:14px;transition:.1s}
+.pills span.on{background:var(--accent);border-color:var(--accent);color:#fff;transform:scale(1.12)}
+.cap{text-align:center;color:var(--muted);font-size:13px;margin:4px 0}
+.dots{display:flex;gap:8px;justify-content:center;margin:6px 0}
+.dots i{width:22px;height:22px;border-radius:50%;border:2px solid var(--line)}.dots i.on{background:var(--ok);border-color:var(--ok)}
+.btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.b{padding:12px 18px;font:inherit;font-weight:700;font-size:15px;border:0;border-radius:12px;background:var(--accent);color:#fff;cursor:pointer;min-height:46px}
+.b.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.all{width:100%;margin-bottom:10px;background:linear-gradient(135deg,var(--accent),#b58ee6)}
+.now{text-align:center;font-weight:700;color:var(--accent);min-height:22px;margin-bottom:8px}
+.note{color:var(--muted);font-size:12px;text-align:center;margin-top:16px;line-height:1.5}
+button:focus-visible{outline:3px solid var(--accent-2);outline-offset:2px}
+</style></head><body><div class="wrap">
+<h1>🎵 Ejercicios vocales</h1>
+<p class="sub">Elige tu tono, toca ▶ y canta junto al piano. Todo suave y cómodo.</p>
+<div class="tono"><b>1 · Mi tono de partida (“Do”)</b>
+<div class="seg" id="pre"></div>
+<div class="nota">Nota de partida: <b id="rn"></b> · Si te queda alto o bajo, ajústalo con <b>▼ ▲</b>.</div></div>
+<div id="list"></div>
+<p class="note">Guía de piano: Salamander Grand Piano (A. Holm, CC BY 3.0). Si algo molesta o duele, detente y avísale a tu fonoaudióloga.</p>
+</div>
+<script>
+(function(){
+var E={
+ mum:{n:'Mum',s:'“Mmm”, boca cerrada',d:'Labios suaves y juntos. Siente cosquillas en los labios y la nariz.',p:[0,2,4,2,0],t:.55},
+ sir:{n:'Sirena suave',s:'“Ng”, desliza la voz',d:'Sube despacio y vuelve a bajar, sin saltos ni esfuerzo.',p:[0,7,0],t:1.6,g:1},
+ m3:{n:'3 tonos',s:'“Mmm” o “Ma”',d:'Do Re Mi Re Do. Un sonido por cada nota.',p:[0,2,4,2,0],t:.6},
+ dom:{n:'Do – Sol',s:'“Mmm” o “Ma”',d:'Do Sol Do Sol. Salto suave, sin apretar.',p:[0,7,0,7],t:.65},
+ e5:{n:'5 tonos',s:'“Mmm” o “Ma”',d:'Do Re Mi Fa Sol y de vuelta.',p:[0,2,4,5,7,5,4,2,0],t:.55},
+ arp:{n:'Do Mi Sol Do',s:'“Mmm” o “Ma”',d:'Sube de a saltitos y termina en Do agudo.',p:[0,4,7,12],t:.75},
+ i2:{n:'Do – Re – Do',s:'“Mmm” o “Ma”',d:'Dos notas vecinas, muy fácil.',p:[0,2,0],t:.8},
+ i3:{n:'Do – Mi – Do',s:'“Mmm” o “Ma”',d:'Un saltito de tercera, sube y baja.',p:[0,4,0],t:.8}
+};
+var SOL={0:'Do',2:'Re',4:'Mi',5:'Fa',7:'Sol',12:'Do↑'};
+var R=[{t:'Calentamiento suave',w:'≈ 3 min',ex:['mum','sir','m3','dom']},
+ {t:'Escalas suaves',w:'≈ 4 min',ex:['m3','e5','arp','i3']},
+ {t:'Sirena y notas vecinas',w:'≈ 3 min',ex:['sir','i2','i3','mum']}];
+var REPS=3,root=57,NN=['Do','Do#','Re','Re#','Mi','Fa','Fa#','Sol','Sol#','La','La#','Si'];
+var $=function(i){return document.getElementById(i)};
+function hoy(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+var DK='vocales-hecho-'+hoy(),DONE={},TK='vocales-tono',C={};
+try{DONE=JSON.parse(localStorage.getItem(DK)||'{}');root=+localStorage.getItem(TK)||57}catch(e){}
+function save(){try{localStorage.setItem(DK,JSON.stringify(DONE));localStorage.setItem(TK,root)}catch(e){}}
+function nm(m){return NN[m%12]+(Math.floor(m/12)-1)}
+function fq(m){return 440*Math.pow(2,(m-69)/12)}
+/* ---------- audio ---------- */
+var ac,mg,buf=null,loading=0,timers=[],stopped=1;
+var SN=['A0','C1','Ds1','Fs1','A1','C2','Ds2','Fs2','A2','C3','Ds3','Fs3','A3','C4','Ds4','Fs4','A4','C5','Ds5','Fs5','A5','C6','Ds6','Fs6','A6','C7','Ds7','Fs7','A7','C8'];
+function ctx(){ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();
+ if(!loading){loading=1;Promise.all(SN.map(function(n){return fetch('../assets/piano-samples/'+n+'.mp3').then(function(r){if(!r.ok)throw 0;return r.arrayBuffer()}).then(function(a){return new Promise(function(ok,no){ac.decodeAudioData(a,ok,no)})})})).then(function(b){buf=b}).catch(function(){buf=null})}
+ return ac}
+function note(m,t0,d,m2){var o,g=ac.createGain();g.connect(mg);
+ if(buf&&!m2){var i=Math.max(0,Math.min(29,Math.round((m-21)/3)));o=ac.createBufferSource();o.buffer=buf[i];o.playbackRate.value=Math.pow(2,(m-21-i*3)/12);
+  g.gain.setValueAtTime(1,t0);g.gain.setValueAtTime(1,t0+d);g.gain.exponentialRampToValueAtTime(.001,t0+d+.5);o.connect(g);o.start(t0);o.stop(t0+d+.6)}
+ else{o=ac.createOscillator();o.type='triangle';var f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=1500;
+  o.frequency.setValueAtTime(fq(m),t0);if(m2)o.frequency.linearRampToValueAtTime(fq(m2),t0+d);
+  g.gain.setValueAtTime(.001,t0);g.gain.linearRampToValueAtTime(.28,t0+.05);g.gain.setValueAtTime(.28,t0+d-.1);g.gain.linearRampToValueAtTime(.001,t0+d+.15);
+  o.connect(f);f.connect(g);o.start(t0);o.stop(t0+d+.2)}}
+function stopAudio(){stopped=1;timers.forEach(clearTimeout);timers=[];
+ if(mg&&ac){mg.gain.setTargetAtTime(0,ac.currentTime,.03);mg=null}
+ seq=0;for(var k in C)if(C[k].run){C[k].run=0;paint(k)}
+ Array.prototype.forEach.call(document.querySelectorAll('.pills span.on'),function(s){s.classList.remove('on')});Array.prototype.forEach.call(document.querySelectorAll('.now'),function(n){n.textContent=''})}
+function playEx(k){return new Promise(function(done){var x=E[k.split('-')[1]],i=k,a=ctx(),t0=a.currentTime+.15;
+ if(!mg){mg=a.createGain();mg.connect(a.destination)}stopped=0;C[i].run=1;paint(i);
+ var T=x.t*1.25,p=x.p,sp=document.querySelectorAll('#r-'+i+' .pills span');
+ if(x.g){var a2=root+p[1];
+  note(root+p[0],t0,T,a2);note(a2,t0+T,T,root+p[2]);}
+ else p.forEach(function(s,j){note(root+s,t0+j*T,T*.92)});
+ p.forEach(function(s,j){timers.push(setTimeout(function(){sp.forEach(function(z){z.classList.remove('on')});if(sp[j])sp[j].classList.add('on')},150+j*T*1000))});
+ timers.push(setTimeout(function(){sp.forEach(function(z){z.classList.remove('on')});C[i].run=0;paint(i);done()},150+p.length*T*1000+(x.g?0:300)))})}
+/* ---------- UI ---------- */
+function ctrl(k){var s=C[k],h='<div class="dots">';for(var i=0;i<REPS;i++)h+='<i class="'+(i<s.c?'on':'')+'"></i>';
+ return h+'</div><div class="cap">'+s.c+' de '+REPS+' veces</div><div class="btns"><button class="b" data-a="pl" data-k="'+k+'">'+(s.run?'■ Detener':'▶ Escuchar')+'</button><button class="b alt" data-a="hi" data-k="'+k+'">＋ Hice una</button><button class="b alt" data-a="rs" data-k="'+k+'">↺</button></div>'}
+function paint(k){var c=$('c-'+k);if(c)c.innerHTML=ctrl(k);var r=$('r-'+k);if(r){r.classList.toggle('run',!!C[k].run);r.classList.toggle('done',!!DONE[k])}}
+function hdr(i){var n=0;R[i].ex.forEach(function(e,j){if(DONE[i+'-'+e+'-'+j])n++});var el=$('x'+i);el.classList.toggle('full',n===R[i].ex.length);el.querySelector('.pg').textContent=n+'/'+R[i].ex.length}
+function rn(){$('rn').textContent=nm(root)+' (Do)';$('pre').querySelectorAll('.pre').forEach(function(b){b.classList.toggle('on',+b.dataset.m===root)})}
+var h='';R.forEach(function(r,i){h+='<section class="ex" id="x'+i+'"><button class="hd" type="button"><span class="tt"><b>'+(i+1)+'. '+r.t+'</b><small>'+r.w+' · '+r.ex.length+' ejercicios</small></span><span class="pg"></span><span class="ch">›</span></button><div class="body"><button class="b all" data-a="all" data-i="'+i+'">▶ Hacer toda la rutina</button><div class="now" id="now'+i+'"></div>';
+ r.ex.forEach(function(e,j){var k=i+'-'+e+'-'+j,x=E[e];C[k]={c:DONE[k]?REPS:0,run:0};
+  h+='<div class="row'+(DONE[k]?' done':'')+'" id="r-'+k+'"><h3>'+x.n+'</h3><p><b>'+x.s+'.</b> '+x.d+'</p><div class="pills">'+x.p.map(function(s){return '<span>'+(SOL[s]||'·')+'</span>'}).join('')+'</div><div id="c-'+k+'">'+ctrl(k)+'</div></div>'});
+ h+='</div></section>'});
+$('list').innerHTML=h;
+[['Más grave',52],['Medio',57],['Más agudo',62]].forEach(function(p){var b=document.createElement('button');b.className='pre';b.textContent=p[0];b.dataset.m=p[1];b.type='button';$('pre').appendChild(b)});
+['▼','▲'].forEach(function(s,i){var b=document.createElement('button');b.className='fine';b.textContent=s;b.type='button';b.setAttribute('aria-label',i?'Subir medio tono':'Bajar medio tono');b.dataset.f=i?1:-1;$('pre').appendChild(b)});
+R.forEach(function(r,i){hdr(i)});rn();
+function mark(k){DONE[k]=true;C[k].c=REPS;save();paint(k);hdr(+k.split('-')[0])}
+var seq=0;
+async function all(i){stopAudio();seq=1;stopped=0;
+ for(var j=0;j<R[i].ex.length&&!stopped;j++){var k=i+'-'+R[i].ex[j]+'-'+j,x=E[R[i].ex[j]];
+  $('now'+i).textContent='Ahora: '+x.n+' — '+x.s;$('r-'+k).scrollIntoView({behavior:'smooth',block:'center'});
+  C[k].c=0;for(var r=0;r<REPS&&!stopped;r++){await playEx(k);if(stopped)break;C[k].c=r+1;paint(k);await new Promise(function(ok){timers.push(setTimeout(ok,1800))})}
+  if(!stopped)mark(k)}
+ seq=0;if(!stopped){$('now'+i).textContent='¡Rutina completa! 🎉'}}
+document.addEventListener('click',function(ev){var b=ev.target.closest('button');if(!b)return;
+ if(b.classList.contains('hd')){b.parentNode.classList.toggle('open');return}
+ if(b.classList.contains('pre')){root=+b.dataset.m;save();rn();return}
+ if(b.classList.contains('fine')){root=Math.max(40,Math.min(70,root+ +b.dataset.f));save();rn();return}
+ var a=b.dataset.a,k=b.dataset.k;if(a==='all'){var i=+b.dataset.i;if(seq){seq=0;stopAudio();return}all(i);return}
+ if(!a)return;
+ if(a==='pl'){if(C[k].run){stopAudio()}else{stopAudio();playEx(k)}}
+ else if(a==='hi'){if(C[k].c<REPS){C[k].c++;if(C[k].c>=REPS)mark(k);else paint(k)}}
+ else if(a==='rs'){stopAudio();C[k].c=0;delete DONE[k];save();paint(k);hdr(+k.split('-')[0])}});
+document.getElementById('x0').classList.add('open');
+})();
+</script></body></html>

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#9b7bd9">
+<title>Mis ejercicios vocales</title>
+<link rel="icon" type="image/png" href="../assets/logo-icon.png">
+<link rel="apple-touch-icon" href="../assets/logo-icon.png">
+<style>
+:root{
+  --bg:#f6f1fb; --card:#ffffff; --ink:#2f2a3d; --muted:#7a7390;
+  --accent:#9b7bd9; --accent-2:#e0a5c8; --ok:#4fb894; --line:#e6ddf3;
+  --shadow:0 10px 30px rgba(120,90,180,.12);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#1d1a28; --card:#272336; --ink:#f0ecfa; --muted:#a9a1c2; --line:#3a3450; --shadow:0 10px 30px rgba(0,0,0,.35); }
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  background:linear-gradient(160deg,var(--bg),color-mix(in srgb,var(--accent-2) 18%,var(--bg)));
+  color:var(--ink); -webkit-font-smoothing:antialiased;
+}
+.hidden{display:none !important}
+
+/* ---------- LOGIN ---------- */
+#login{min-height:100%; display:flex; align-items:center; justify-content:center; padding:24px}
+.login-card{
+  width:100%; max-width:400px; background:var(--card); border-radius:24px;
+  padding:34px 28px; box-shadow:var(--shadow); text-align:center;
+}
+.logo{
+  width:64px; height:64px; margin:0 auto 14px; border-radius:20px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  display:grid; place-items:center; font-size:30px;
+}
+.login-card h1{margin:0 0 6px; font-size:26px}
+.login-card p{margin:0 0 22px; color:var(--muted); font-size:15px}
+.field{text-align:left; margin-bottom:14px}
+.field label{display:block; font-size:13px; font-weight:600; margin-bottom:6px; color:var(--muted)}
+.field input{
+  width:100%; padding:14px 16px; font-size:17px; border-radius:14px;
+  border:2px solid var(--line); background:transparent; color:var(--ink);
+}
+.field input:focus{outline:none; border-color:var(--accent)}
+.btn{
+  width:100%; padding:15px; font-size:17px; font-weight:700; border:0; border-radius:14px;
+  background:linear-gradient(135deg,var(--accent),#b58ee6); color:#fff; cursor:pointer;
+}
+.btn:hover{filter:brightness(1.06)}
+.error{color:#d14b6b; font-size:14px; min-height:20px; margin:4px 0 10px}
+
+/* ---------- LOGO FONOAUDIÓLOGA ---------- */
+.brand-logo{display:block;width:230px;max-width:80%;height:auto;margin:0 auto 14px;background:#fff;border-radius:18px;padding:6px}
+.top-logo{display:block;height:46px;width:auto;background:#fff;border-radius:12px;padding:3px 6px;flex:none}
+.foot-logo{display:block;width:130px;height:auto;margin:6px auto 10px;background:#fff;border-radius:14px;padding:4px;opacity:.95}
+.topbar .brand{display:flex;align-items:center;gap:12px;min-width:0}
+@media(max-width:420px){.top-logo{height:38px}}
+
+/* ---------- APP ---------- */
+#app{min-height:100%; display:flex; flex-direction:column}
+.topbar{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:14px 18px; padding-top:calc(14px + env(safe-area-inset-top,0px));
+}
+.hello h2{margin:0; font-size:21px}
+.hello span{color:var(--muted); font-size:14px}
+.out{
+  background:var(--card); border:1px solid var(--line); color:var(--ink);
+  padding:9px 14px; border-radius:12px; font-size:14px; cursor:pointer;
+}
+.progress{padding:0 18px 4px}
+.bar{height:8px; background:var(--line); border-radius:99px; overflow:hidden}
+.bar > i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--accent),var(--ok)); transition:width .4s}
+.progress small{display:block; margin-top:6px; color:var(--muted); font-size:13px}
+
+.steps{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:10px; padding:12px 18px;
+}
+.step{
+  position:relative; background:var(--card); border:2px solid transparent; border-radius:16px;
+  padding:12px 8px; text-align:center; cursor:pointer; box-shadow:var(--shadow);
+  color:var(--ink); font:inherit;
+}
+.step .ico{font-size:24px; display:block}
+.step .t{font-size:13px; font-weight:700; line-height:1.2; display:block; margin-top:4px}
+.step.active{border-color:var(--accent)}
+.step .tick{
+  position:absolute; top:6px; right:6px; width:20px; height:20px; border-radius:50%;
+  background:var(--ok); color:#fff; font-size:12px; display:none; place-items:center;
+}
+.step.done .tick{display:grid}
+
+.stage{flex:1; padding:0 18px 12px; display:flex; flex-direction:column; min-height:0}
+.panel{
+  flex:1; display:flex; flex-direction:column; background:var(--card); border-radius:20px;
+  box-shadow:var(--shadow); overflow:hidden; min-height:70vh;
+}
+.subtabs{display:flex; gap:8px; padding:10px 12px; border-bottom:1px solid var(--line); flex-wrap:wrap}
+.subtabs button{flex:1; min-width:120px; padding:10px 12px; border-radius:12px; border:2px solid var(--line); background:transparent; color:var(--ink); font:inherit; font-weight:600; font-size:14px; cursor:pointer}
+.subtabs button.active{border-color:var(--accent); background:color-mix(in srgb,var(--accent) 14%,transparent)}
+.panel iframe{flex:1; width:100%; border:0; min-height:70vh; background:transparent}
+.panel-foot{
+  display:flex; justify-content:space-between; align-items:center; gap:10px;
+  padding:12px 16px; border-top:1px solid var(--line); flex-wrap:wrap;
+}
+.mark{
+  display:flex; align-items:center; gap:10px; font-size:15px; font-weight:600; cursor:pointer;
+}
+.mark input{width:22px; height:22px; accent-color:var(--ok)}
+.nav button{
+  padding:10px 16px; border-radius:12px; border:1px solid var(--line); background:transparent;
+  color:var(--ink); font-size:15px; cursor:pointer; margin-left:6px;
+}
+.nav button.primary{background:var(--accent); color:#fff; border-color:var(--accent)}
+.nav button:disabled{opacity:.4; cursor:default}
+.note{text-align:center; color:var(--muted); font-size:12px; padding:6px 18px 18px}
+
+
+/* ---------- AYUDA: botón, barra de guía, hoja de guía y tour ---------- */
+.top-btns{display:flex; gap:8px; align-items:center}
+.out.help{background:linear-gradient(135deg,var(--accent),#b58ee6); color:#fff; border-color:transparent; font-weight:700}
+.guidebar{
+  display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+  padding:10px 14px; border-bottom:1px solid var(--line);
+  background:color-mix(in srgb,var(--accent) 10%,transparent);
+}
+.guidebar .gtxt{flex:1; min-width:180px; font-size:13.5px; line-height:1.35; color:var(--muted)}
+.guidebar .gtxt b{display:block; font-size:15px; color:var(--ink)}
+.guide-btn{
+  padding:10px 16px; border-radius:12px; border:0; cursor:pointer; font:inherit; font-weight:700; font-size:14px;
+  background:var(--accent); color:#fff;
+}
+.guide-btn.pulse{animation:pulso 1.8s ease-out infinite}
+@keyframes pulso{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}70%,100%{box-shadow:0 0 0 12px transparent}}
+
+.sheet-back{
+  position:fixed; inset:0; z-index:9000; background:rgba(20,15,35,.58);
+  display:flex; align-items:flex-end; justify-content:center;
+}
+.sheet{
+  width:100%; max-width:640px; max-height:92vh; overflow:auto; background:var(--card); color:var(--ink);
+  border-radius:24px 24px 0 0; padding:22px 20px calc(20px + env(safe-area-inset-bottom,0px));
+  box-shadow:0 -10px 40px rgba(0,0,0,.25); animation:sube .28s ease-out;
+}
+@keyframes sube{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@media (min-width:700px){ .sheet-back{align-items:center; padding:20px} .sheet{border-radius:24px} }
+.sheet .sh-ico{font-size:34px; line-height:1}
+.sheet h3{margin:6px 0 6px; font-size:22px}
+.sheet .lead{margin:0 0 16px; color:var(--muted); font-size:15px; line-height:1.5}
+.sheet h4{margin:20px 0 8px; font-size:15px}
+.gsteps{list-style:none; margin:0; padding:0; display:grid; gap:10px}
+.gsteps li{display:flex; gap:12px; align-items:flex-start; padding:12px; border:1px solid var(--line); border-radius:14px}
+.gsteps .n{
+  flex:none; width:36px; height:36px; border-radius:50%; display:grid; place-items:center; font-size:18px;
+  background:color-mix(in srgb,var(--accent) 16%,transparent);
+}
+.gsteps li > div > b{display:block; font-size:15px; margin-bottom:2px}
+.gsteps span.d b{color:var(--ink)}
+.gsteps span.d{font-size:14px; line-height:1.5; color:var(--muted)}
+.tips{margin-top:16px; padding:12px 14px; border-radius:14px; background:color-mix(in srgb,var(--ok) 13%,transparent); font-size:14px; line-height:1.5}
+.tips b{display:block; margin-bottom:4px}
+.tips ul{margin:0; padding-left:18px}
+.tips li{margin:3px 0}
+.sheet .ok-btn{margin-top:18px}
+
+.tour-layer{position:fixed; inset:0; z-index:10000}
+.tour-dim{position:absolute; inset:0; background:rgba(20,15,35,.66)}
+.tour-hole{
+  position:absolute; border-radius:16px; pointer-events:none;
+  box-shadow:0 0 0 100vmax rgba(20,15,35,.66), 0 0 0 3px var(--accent-2) inset;
+  transition:left .25s, top .25s, width .25s, height .25s;
+}
+.tour-tip{
+  position:absolute; background:var(--card); color:var(--ink); border-radius:20px; padding:18px 18px 14px;
+  box-shadow:0 18px 50px rgba(0,0,0,.4); max-width:calc(100vw - 24px);
+}
+.tour-tip .cnt{font-size:12px; font-weight:700; color:var(--accent); letter-spacing:.04em; text-transform:uppercase}
+.tour-tip h3{margin:4px 0 6px; font-size:19px}
+.tour-tip p{margin:0 0 12px; font-size:15px; line-height:1.5; color:var(--muted)}
+.tour-tip .dots{display:flex; gap:5px; margin-bottom:12px}
+.tour-tip .dots i{width:7px; height:7px; border-radius:50%; background:var(--line)}
+.tour-tip .dots i.on{background:var(--accent); width:20px; border-radius:99px}
+.tour-actions{display:flex; align-items:center; justify-content:space-between; gap:8px}
+.tour-actions .skip{background:none; border:0; color:var(--muted); font:inherit; font-size:14px; cursor:pointer; text-decoration:underline; padding:8px 4px}
+.tour-actions .go{display:flex; gap:8px}
+.tour-actions .go button{padding:10px 16px; border-radius:12px; font:inherit; font-weight:700; font-size:15px; cursor:pointer; border:1px solid var(--line); background:transparent; color:var(--ink)}
+.tour-actions .go button.primary{background:var(--accent); border-color:var(--accent); color:#fff}
+@media (prefers-reduced-motion:reduce){ .tour-hole{transition:none} .sheet{animation:none} .guide-btn.pulse{animation:none} }
+button:focus-visible{outline:3px solid var(--accent-2); outline-offset:2px}
+
+@media (max-width:520px){
+  .steps{gap:6px; padding:10px 12px}
+  .step{padding:10px 4px}
+  .step .t{font-size:11px}
+  .stage,.progress,.topbar{padding-left:12px; padding-right:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= LOGIN ================= -->
+<section id="login">
+  <form class="login-card" id="loginForm" autocomplete="off">
+    <img class="brand-logo" src="../assets/logo-matilde-pizarro.png" alt="Matilde Pizarro, fonoaudióloga">
+    <h1>Bienvenido/a</h1>
+    <p>Ingresa para hacer tus ejercicios de hoy</p>
+    <div class="field">
+      <label for="user">Nombre</label>
+      <input id="user" type="text" autocapitalize="words" autocomplete="username" required>
+    </div>
+    <div class="field">
+      <label for="pass">Contraseña</label>
+      <input id="pass" type="password" autocomplete="current-password" required>
+    </div>
+    <div class="error" id="err" role="alert"></div>
+    <button class="btn" type="submit">Ingresar</button>
+  </form>
+</section>
+
+<!-- ================= APP ================= -->
+<main id="app" class="hidden">
+  <div class="topbar">
+    <div class="brand"><img class="top-logo" src="../assets/logo-matilde-pizarro.png" alt="Matilde Pizarro, fonoaudióloga"><div class="hello"><h2 id="hello">Hola</h2><span id="today"></span></div></div>
+    <div class="top-btns"><button class="out help" id="helpBtn" type="button" aria-label="Ver el tour de ayuda">❓ Ayuda</button><button class="out" id="logout">Salir</button></div>
+  </div>
+
+  <div class="progress" id="progressWrap">
+    <div class="bar"><i id="barFill"></i></div>
+    <small id="progTxt"></small>
+  </div>
+
+  <nav class="steps" id="steps" aria-label="Mis ejercicios"></nav>
+
+  <div class="stage">
+    <div class="panel">
+      <div class="guidebar hidden" id="guidebar">
+        <div class="gtxt" id="guideTxt"></div>
+        <button class="guide-btn" id="guideBtn" type="button">💡 ¿Cómo se hace?</button>
+      </div>
+      <div class="subtabs hidden" id="subtabs"></div>
+      <iframe id="frame" title="Ejercicio" allow="microphone; autoplay; fullscreen"></iframe>
+      <div class="panel-foot">
+        <label class="mark"><input type="checkbox" id="doneChk"> Marcar como hecho hoy</label>
+        <div class="nav">
+          <button id="prev">← Anterior</button>
+          <button id="next" class="primary">Siguiente →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <img class="foot-logo" src="../assets/logo-matilde-pizarro.png" alt="Matilde Pizarro, fonoaudióloga">
+  <div class="note">Herramienta de entrenamiento vocal — no reemplaza tu sesión con tu fonoaudióloga.</div>
+</main>
+
+<!-- ================= AYUDA: HOJA DE GUÍA ================= -->
+<div class="sheet-back hidden" id="sheetBack">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" id="sheet"></div>
+</div>
+
+<!-- ================= AYUDA: TOUR ================= -->
+<div class="tour-layer hidden" id="tourLayer">
+  <div class="tour-dim" id="tDim"></div>
+  <div class="tour-hole" id="tHole" style="display:none"></div>
+  <div class="tour-tip" id="tTip" role="dialog" aria-modal="true" aria-labelledby="tTitle"></div>
+</div>
+
+<script>
+/* =====================================================================
+   CONFIGURACIÓN DE PACIENTES
+   Para agregar un paciente nuevo, copia un bloque y cambia los datos.
+   'modulos' define qué ejercicios ve cada paciente y en qué orden.
+   Módulos disponibles: respiracion, biofeedback (incluye Rango Tonal), sesion
+   NOTA: el login es del lado del navegador (sirve para organizar, no
+   es seguridad real: cualquiera que lea el código ve las contraseñas).
+   ===================================================================== */
+var PACIENTES = {
+  'michel': { nombre: 'Michel', clave: '1234',
+              modulos: ['rutina', 'respiracion', 'biofeedback', 'sesion'],
+              // ejercicios del Biofeedback que NO se le muestran a este paciente
+              ocultarBiofeedback: ['glideDown'] },
+  'cari':   { nombre: 'Cari', clave: 'soul',
+              modulos: ['rutinaCari', 'vocales', 'respiracion'],
+              ocultarBiofeedback: [] }
+  // 'ana':  { nombre: 'Ana', clave: 'abcd', modulos: ['respiracion', 'sesion'] },
+};
+
+/* Cada módulo tiene 1 o más "partes". Biofeedback incluye Rango Tonal. */
+var MODULOS = {
+  rutina: { ico:'📅', titulo:'Rutina Semanal',
+    partes:[{ titulo:'Rutina Semanal', guia:'rutina', url:'../rutina-semanal/index.html?embed=1' }] },
+  rutinaCari: { ico:'📅', titulo:'Rutina Semanal',
+    partes:[{ titulo:'Rutina Semanal', guia:'rutina', url:'../rutina-cari/index.html?embed=1' }] },
+  vocales: { ico:'🎵', titulo:'Ejercicios vocales',
+    partes:[{ titulo:'Ejercicios vocales', guia:'vocales', url:'../ejercicios-vocales/index.html?embed=1' }] },
+  biofeedbackLive: { ico:'📶', titulo:'Biofeedback',
+    partes:[{ titulo:'Biofeedback en vivo', guia:'biofeedback', url:'../biofeedback-vocal/index.html?embed=1', biofeedback:true }] },
+  respiracion: { ico:'🌬️', titulo:'Respiración Cuadrada',
+    partes:[{ titulo:'Respiración Cuadrada', guia:'respiracion', url:'../respiracion-cuadrada/index.html?embed=1' }] },
+  biofeedback: { ico:'📶', titulo:'Biofeedback y Rango Tonal',
+    partes:[{ titulo:'Biofeedback en vivo', guia:'biofeedback', url:'../biofeedback-vocal/index.html?embed=1', biofeedback:true },
+            { titulo:'Rango Tonal', guia:'rango',         url:'../rango-tonal-afirmativo/index.html?embed=1' }] },
+  sesion:      { ico:'💗', titulo:'Sesión diaria',
+    partes:[{ titulo:'Sesión diaria', guia:'sesion', url:'../sesion-diaria/index.html?embed=1' }] }
+};
+
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var SKEY = 'paciente-sesion';
+  var actual = null, lista = [], idx = 0;
+
+  function hoy(){ var d=new Date(); return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+  function doneKey(){ return 'paciente-hecho-'+actual.id+'-'+hoy(); }
+  function getDone(){ try{ return JSON.parse(localStorage.getItem(doneKey())||'{}'); }catch(e){ return {}; } }
+  function setDone(o){ try{ localStorage.setItem(doneKey(), JSON.stringify(o)); }catch(e){} }
+
+  function entrar(id){
+    var p = PACIENTES[id]; if(!p) return false;
+    actual = { id:id, nombre:p.nombre, modulos:p.modulos, ocultarBiofeedback:p.ocultarBiofeedback||[] };
+    lista = p.modulos.filter(function(m){ return MODULOS[m]; });
+    try{ sessionStorage.setItem(SKEY, id); }catch(e){}
+    $('login').classList.add('hidden');
+    $('app').classList.remove('hidden');
+    $('hello').textContent = 'Hola, ' + p.nombre + ' 👋';
+    $('today').textContent = new Date().toLocaleDateString('es-CL',{weekday:'long',day:'numeric',month:'long'});
+    document.title = 'Ejercicios de ' + p.nombre;
+    tourPendiente = !tourVisto();
+    dibujarPasos(); ir(0);
+    if(tourPendiente) setTimeout(iniciarTour, 600);
+    return true;
+  }
+
+  function salir(){
+    tourActivo = false; tourPendiente = false; gtoken++;
+    $('tourLayer').classList.add('hidden'); $('sheetBack').classList.add('hidden');
+    try{ sessionStorage.removeItem(SKEY); }catch(e){}
+    $('frame').src = 'about:blank';
+    actual = null;
+    $('app').classList.add('hidden');
+    $('login').classList.remove('hidden');
+    $('pass').value = ''; $('user').value = '';
+    document.title = 'Mis ejercicios vocales';
+  }
+
+  function dibujarPasos(){
+    var nav = $('steps'); nav.innerHTML = '';
+    nav.style.gridTemplateColumns = 'repeat(' + lista.length + ',1fr)';
+    lista.forEach(function(m,i){
+      var b = document.createElement('button');
+      b.className = 'step'; b.type = 'button'; b.dataset.i = i;
+      b.innerHTML = '<span class="tick">✓</span><span class="ico">'+MODULOS[m].ico+'</span><span class="t">'+MODULOS[m].titulo+'</span>';
+      b.addEventListener('click', function(){ ir(i); });
+      nav.appendChild(b);
+    });
+  }
+
+  var parte = 0;
+  function urlParte(m, pt){
+    var u = pt.url;
+    if(pt.biofeedback && actual.ocultarBiofeedback && actual.ocultarBiofeedback.length)
+      u += '&hide=' + encodeURIComponent(actual.ocultarBiofeedback.join(','));
+    return u;
+  }
+  function ir(i){
+    idx = Math.max(0, Math.min(lista.length-1, i));
+    mostrarParte(0);
+    $('prev').disabled = idx === 0;
+    $('next').disabled = idx === lista.length-1;
+    refrescar();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  function mostrarParte(j){
+    var m = MODULOS[lista[idx]]; parte = j;
+    var pt = m.partes[j];
+    var f = $('frame');
+    f.src = urlParte(m, pt);            // se carga solo la parte activa
+    f.title = pt.titulo;
+    var st = $('subtabs');
+    st.innerHTML = '';
+    if(m.partes.length > 1){
+      m.partes.forEach(function(p2, k){
+        var b = document.createElement('button');
+        b.type = 'button'; b.textContent = p2.titulo;
+        if(k === j) b.className = 'active';
+        b.addEventListener('click', function(){ mostrarParte(k); });
+        st.appendChild(b);
+      });
+      st.classList.remove('hidden');
+    } else { st.classList.add('hidden'); }
+    actualizarGuiaBar();
+    guiaAutomatica();
+  }
+
+  function refrescar(){
+    var d = getDone(), n = 0;
+    Array.prototype.forEach.call($('steps').children, function(b,i){
+      var m = lista[i];
+      b.classList.toggle('active', i === idx);
+      b.classList.toggle('done', !!d[m]);
+      if(d[m]) n++;
+    });
+    $('doneChk').checked = !!d[lista[idx]];
+    $('barFill').style.width = (n/lista.length*100) + '%';
+    $('progTxt').textContent = n === lista.length
+      ? '¡Completaste todos tus ejercicios de hoy! 🎉'
+      : 'Hoy llevas ' + n + ' de ' + lista.length + ' ejercicios';
+  }
+
+  $('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var id = $('user').value.trim().toLowerCase();
+    var p = PACIENTES[id];
+    if(p && p.clave === $('pass').value){
+      $('err').textContent = '';
+      entrar(id);
+    } else {
+      $('err').textContent = 'Nombre o contraseña incorrectos.';
+    }
+  });
+  $('logout').addEventListener('click', salir);
+  $('prev').addEventListener('click', function(){ ir(idx-1); });
+  $('next').addEventListener('click', function(){ ir(idx+1); });
+  $('doneChk').addEventListener('change', function(){
+    var d = getDone(); d[lista[idx]] = this.checked; setDone(d); refrescar();
+  });
+
+
+  /* =====================================================================
+     AYUDA: TOUR DE BIENVENIDA + GUÍA "¿CÓMO SE HACE?" DE CADA EJERCICIO
+     - El tour se muestra solo la primera vez que el paciente entra (en ese
+       dispositivo) y siempre se puede repetir con el botón "❓ Ayuda".
+     - La guía de cada ejercicio se abre sola la primera vez que se visita
+       ese ejercicio y después queda a un toque en "💡 ¿Cómo se hace?".
+     Para editar los textos, modifica los objetos GUIAS y TOUR_PASOS.
+     ===================================================================== */
+  var GUIAS = {
+    rutina: {
+      ico:'📅', titulo:'Rutina Semanal',
+      corto:'Todos los ejercicios de tu pauta, cada uno con sus cronómetros.',
+      lead:'Cada ejercicio de tu pauta tiene su propio apartado. Ábrelo y sigue los cronómetros y contadores; suena un aviso cuando termina cada paso.',
+      pasos:[
+        ['📂','Abre un ejercicio','Toca su nombre para desplegarlo. Arriba están los de “A diario” y abajo los “Ocasionales” (1 a 2 veces por semana).'],
+        ['⏱️','Cronómetros','Toca “Iniciar”. Al terminar suena un aviso y el paso queda marcado ✓. Si dejas activada la casilla de arriba, el siguiente cronómetro parte solo a los 3 segundos.'],
+        ['🔢','Repeticiones','En los ejercicios de vocalización y enfriamiento toca “Hice una” cada vez que completes una repetición.'],
+        ['🫁','Respiración','El contador te dice cuándo inhalar, mantener y exhalar. En Respiración cuadrada puedes ajustar los tiempos de exhalación.'],
+        ['🌅','Mañana y noche','Nebulización y Tubo en agua van mejor en la mañana; el Enfriamiento, en la noche.']
+      ],
+      tips:['Todo debe sentirse suave y cómodo, sin forzar la voz.','Si algo molesta o duele, detente y avísale a tu fonoaudióloga.','Mantente hidratado/a durante el día.']
+    },
+    vocales: {
+      ico:'🎵', titulo:'Ejercicios vocales',
+      corto:'Canta junto al piano: rutinas cortas y fáciles.',
+      lead:'Elige tu tono, toca ▶ y canta lo que escuchas. Cada ejercicio se repite 3 veces. Puedes hacer una rutina completa con un solo toque.',
+      pasos:[
+        ['🎚️','Elige tu tono','Arriba toca “Más grave”, “Medio” o “Más agudo”. Con ▼ ▲ lo afinas de a medio tono. Se queda guardado.'],
+        ['▶️','Toca “Hacer toda la rutina”','Suena el piano, tú cantas, y la rutina pasa sola de un ejercicio al siguiente. Toca el botón otra vez para detenerla.'],
+        ['👂','O ejercicio por ejercicio','Toca “Escuchar”, canta lo mismo y toca “Hice una”. Con 3 veces el ejercicio queda ✓.'],
+        ['🎶','Sigue las notas','Las burbujas con Do, Re, Mi… se encienden en el momento en que suena cada nota.']
+      ],
+      tips:['Si la nota es muy alta o muy baja, cambia tu tono de partida.','Canta suave, sin forzar. Si algo duele, detente y avísale a tu fonoaudióloga.','Si no se escucha, sube el volumen y toca ▶ de nuevo.']
+    },
+    respiracion: {
+      ico:'🌬️', titulo:'Respiración Cuadrada',
+      corto:'Calma tu cuerpo y prepara tu voz respirando en 4 tiempos iguales.',
+      lead:'Este ejercicio relaja el cuerpo y ordena tu respiración antes de usar la voz. Dura pocos minutos y el círculo te va guiando.',
+      pasos:[
+        ['🪑','Ponte cómodo/a','Siéntate con la espalda apoyada, los hombros sueltos y los pies firmes en el suelo.'],
+        ['📋','Elige tu ejercicio','En la lista “Biblioteca” toca el ejercicio que te indicó tu fonoaudióloga. Al tocarlo, su nombre aparece en el centro.'],
+        ['▶️','Toca “Iniciar”','Desde ahí solo sigue el círculo grande. No hay que hacer nada más con la pantalla.'],
+        ['🫁','Sigue el ritmo del círculo','<b>Inhalar:</b> toma aire suave por la nariz mientras el círculo crece. <b>Retener:</b> guarda el aire sin apretar. <b>Exhalar:</b> suelta el aire lento mientras el círculo se achica. <b>Pausa:</b> espera un momento sin aire y vuelve a empezar.'],
+        ['⏸️','¿Necesitas descansar?','Toca “Pausar” cuando quieras. Está bien ir a tu ritmo.'],
+        ['✅','Al terminar','Abajo marca “Marcar como hecho hoy” y pasa al siguiente ejercicio.']
+      ],
+      tips:[
+        'Si te mareas, vuelve a respirar normal y descansa un momento.',
+        'Los íconos de arriba cambian el tema (claro/oscuro), silencian o activan el sonido guía, y activan el “modo interactivo” (mantienes presionado el círculo para inhalar a tu propio ritmo). Este último es opcional.',
+        'Puedes ignorar el “Editor de ejercicio” y los botones Nuevo, Importar y Exportar: son para tu fonoaudióloga. Úsalos solo si ella te lo pide.'
+      ]
+    },
+    biofeedback: {
+      ico:'📶', titulo:'Biofeedback en vivo',
+      corto:'Mira tu tono de voz en pantalla mientras hablas y compáralo con tu banda objetivo.',
+      lead:'La pantalla dibuja tu tono de voz en tiempo real. Tu meta es que la línea de puntos se mantenga dentro de la banda objetivo (la franja marcada), sin forzar la garganta.',
+      pasos:[
+        ['🎤','Prepara el micrófono','Busca un lugar tranquilo. Cuando el navegador te pregunte, toca “Permitir” el micrófono. Si tienes más de uno, elígelo en la lista “Micrófono”.'],
+        ['👆','1 · Elige un ejercicio','Toca uno de los botones de ejercicio. Justo debajo aparece el “Cómo hacerlo” de ese ejercicio.'],
+        ['🎯','2 · Revisa tu banda objetivo','Ya viene una banda de referencia. Si tu fonoaudióloga te dio otra, elígela en la lista o escribe el mínimo y el máximo (en Hz).'],
+        ['▶️','3 · Toca “▶ Iniciar”','Habla o canta el ejercicio. Mira cómo los puntos suben cuando tu tono sube y bajan cuando baja.'],
+        ['📊','Lee tus números','<b>Tono actual</b> y <b>Promedio</b> (en Hz), <b>% en banda</b> (mientras más alto, más tiempo estuviste dentro de la franja) y <b>Duración</b>. La barra de brillo es solo una guía aproximada.'],
+        ['💾','Toca “■ Detener y guardar”','Tu práctica queda en el “Historial de sesiones” más abajo, para que veas tu avance.']
+      ],
+      extraTitulo:'Los ejercicios disponibles',
+      extra:[
+        ['sostenida','Vocal sostenida','Sostén “aaaa” con una respiración cómoda de 5 a 8 segundos, dentro de la banda. Repite 5 o 6 veces, descansando entre intentos.'],
+        ['lectura','Lectura de frase','Lee en voz alta la frase que aparece, tratando de mantener tu tono dentro de la banda toda la oración, sin forzar la garganta.'],
+        ['glideUp','Glide ascendente','Desliza tu voz suavemente de grave a agudo, como una sirena, cruzando la banda sin quebrar la voz.'],
+        ['glideDown','Glide descendente','Desliza tu voz suavemente de agudo a grave, cruzando la banda de forma controlada.'],
+        ['espontanea','Habla espontánea','Habla libremente 30 a 60 segundos (cuenta tu día, describe una foto) y mira cuánto tiempo tu tono se queda en la banda.']
+      ],
+      tips:[
+        'No tiene que salir perfecto: lo importante es practicar con constancia y sentirte cómodo/a.',
+        'Si la voz se cansa, duele o se pone ronca, descansa y avísale a tu fonoaudióloga.',
+        'La otra parte de este módulo es la pestaña “Rango Tonal”, aquí arriba.',
+        'El texto “Acerca de esta herramienta” es información científica opcional: no necesitas leerlo para practicar.'
+      ]
+    },
+    rango: {
+      ico:'🎼', titulo:'Rango Tonal',
+      corto:'Mide tu tono habitual, define tu meta y practica deslizar la voz hacia ella.',
+      lead:'Este ejercicio tiene 4 pestañas dentro de la pantalla. Lo ideal es hacerlas en orden: 1 → 2 → 3, y la 4 para ver tu progreso. “F0” es simplemente la altura (el tono) de tu voz, en Hz.',
+      pasos:[
+        ['📏','Pestaña “Medir tono habitual”','Toca “Iniciar medición” y habla con naturalidad unos segundos (por ejemplo, cuenta tu día). La barra de nivel debe moverse cuando hablas; si no, revisa el micrófono y los permisos. Cuando el F0 promedio se vea estable, toca “Detener” y luego “Guardar como tono habitual”.'],
+        ['🎯','Pestaña “Rango objetivo”','Elige una banda de referencia, o escribe mínimo y máximo junto con tu fonoaudióloga. Luego toca “Guardar banda objetivo”.'],
+        ['🌈','Pestaña “Ejercicio de glide”','Toca “Iniciar ejercicio” y desliza tu voz suavemente desde tu tono habitual hacia la banda objetivo. El indicador te muestra dónde está tu voz y avisa si estás dentro o fuera de la banda. Al terminar, “Detener” y “Guardar sesión en el progreso”.'],
+        ['📈','Pestaña “Progreso”','Aquí ves el historial: fecha, tono habitual, banda, % dentro de la banda y duración. Puedes exportarlo en CSV o PDF para mostrárselo a tu fonoaudióloga.']
+      ],
+      tips:[
+        'Cuando el navegador pida el micrófono, toca “Permitir”.',
+        'Si tu fonoaudióloga ya te indicó una banda, usa esa.',
+        'Hazlo sin prisa y sin forzar: si algo molesta en la garganta, para y descansa.'
+      ]
+    },
+    sesion: {
+      ico:'💗', titulo:'Sesión diaria',
+      corto:'Tu práctica del día en 3 bloques, marcando cada repetición.',
+      lead:'Aquí vas registrando lo que practicas y cómo te sientes. Los datos del micrófono son solo un apoyo: lo más importante es cómo sientes tu voz.',
+      pasos:[
+        ['📝','Tus datos','Escribe tu nombre, revisa la fecha y toca “Guardar datos”.'],
+        ['🎤','Micrófono (opcional)','Puedes activar el micrófono arriba para ver el volumen y el tono en vivo. Si prefieres, practica igual sin él.'],
+        ['1️⃣','Bloque 1 · Resonancia con /M/','Con la boca cerrada, haz “mmm”: sostenida, glissando (subiendo y bajando), sirena, melodía de “cumpleaños” y humming libre. Después de cada repetición marca una casilla. “Meta” te dice cuántas hacer.'],
+        ['2️⃣','Bloque 2 · Vocal /U/','Igual que el anterior pero con “u” de labios redondeados, como soplando por un tubito: sostenida, glissando, sirena, espiral, acento rítmico (UuUuUu) y “cumpleaños”.'],
+        ['3️⃣','Bloque 3 · Lectura y comunicación','Lee las frases con énfasis y pulsa “Medir” mientras las dices en voz alta. Luego lee el texto y el cuento en voz alta; los botones “Medir y grabar” graban 12 o 25 segundos.'],
+        ['💪','Registrar esfuerzo (Borg)','En cada bloque puedes tocar “Registrar esfuerzo (Borg)” y elegir un número según cuánto esfuerzo sentiste al hacerlo.'],
+        ['💗','Tu autoevaluación','Mueve el deslizador de 0 a 10: qué tan cómoda y en congruencia sentiste tu voz hoy. Es lo más importante. Si quieres, escribe un comentario.'],
+        ['📤','Al terminar','Con “Exportar ZIP (PDF + audios)” descargas tu informe y tus grabaciones para compartirlas con tu fonoaudióloga.']
+      ],
+      tips:[
+        'El panel “Herramientas” (grabaciones y registro de sesión) se puede flotar, compactar o minimizar.',
+        '“Reiniciar” deja un bloque en cero y “Reiniciar todo” borra toda la sesión: úsalos con cuidado.',
+        'Toma agua, haz pausas cuando las necesites y, si algo duele, detente.'
+      ]
+    }
+  };
+
+  var TOUR_PASOS = [
+    { ico:'👋', titulo:function(){ return '¡Hola, ' + actual.nombre + '!'; },
+      texto:'Te muestro en un minuto cómo funciona esta página. Son pocos pasos y puedes salir cuando quieras.' },
+    { sel:'#progressWrap', ico:'📈', titulo:function(){ return 'Tu progreso de hoy'; },
+      texto:'Esta barra se va llenando a medida que completas tus ejercicios. Cada día parte de cero.' },
+    { sel:'#steps', ico:'🗂️', titulo:function(){ return 'Tus ejercicios'; },
+      get texto(){ return 'Estos son los ejercicios de hoy, en orden. Toca uno para abrirlo. Cuando termines uno, aparece un ✓ verde.' + (actual && actual.id==='cari' ? '' : ' Algunos ejercicios tienen pestañas, por ejemplo “Biofeedback” y “Rango Tonal”.'); } },
+    { sel:'#guidebar', ico:'💡', titulo:function(){ return '¿Cómo se hace?'; },
+      texto:'En cada ejercicio toca este botón para ver las instrucciones paso a paso. Se abre sola la primera vez que entras a cada uno.' },
+    { sel:'#frame', maxH:200, ico:'🎯', titulo:function(){ return 'Aquí haces el ejercicio'; },
+      texto:'Esta es la zona de práctica. Cuando te pida usar el micrófono, toca “Permitir”. Después de eso, solo sigue las indicaciones en pantalla.' },
+    { sel:'.mark', ico:'✅', titulo:function(){ return 'Marca lo que ya hiciste'; },
+      texto:'Al terminar un ejercicio, marca esta casilla. Se guarda en este dispositivo y suma a tu barra de progreso de hoy.' },
+    { sel:'.nav', ico:'↔️', titulo:function(){ return 'Avanza a tu ritmo'; },
+      texto:'Con “Anterior” y “Siguiente” te mueves entre tus ejercicios. También puedes volver a cualquiera cuando quieras.' },
+    { sel:'#helpBtn', ico:'❓', titulo:function(){ return '¿Dudas? Aquí estoy'; },
+      texto:'Toca “Ayuda” cuando quieras para ver este recorrido de nuevo. Y “Salir” cierra tu sesión al terminar.' },
+    { ico:'🌟', titulo:function(){ return '¡Todo listo!'; },
+      texto:'Busca un lugar tranquilo, ten agua cerca y no fuerces tu voz: si algo duele, para y avísale a tu fonoaudióloga. ¡Vamos con el primer ejercicio!' }
+  ];
+
+  var tourActivo = false, tourPendiente = false, pasosTour = [], ti = 0, gtoken = 0, focoPrevio = null;
+
+  function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function tourVisto(){ return !!lsGet('paciente-tour-visto-'+actual.id); }
+  function guiaKey(clave){ return 'paciente-guia-vista-'+actual.id+'-'+clave; }
+
+  /* ---------- Guía por ejercicio ---------- */
+  function guiaActual(){
+    var m = MODULOS[lista[idx]]; if(!m) return null;
+    var pt = m.partes[parte]; if(!pt || !pt.guia) return null;
+    return { clave:pt.guia, g:GUIAS[pt.guia] };
+  }
+  function actualizarGuiaBar(){
+    var ga = guiaActual(), bar = $('guidebar');
+    if(!ga || !ga.g){ bar.classList.add('hidden'); return; }
+    bar.classList.remove('hidden');
+    $('guideTxt').innerHTML = '<b>' + ga.g.ico + ' ' + ga.g.titulo + '</b>' + ga.g.corto;
+    $('guideBtn').classList.toggle('pulse', !lsGet(guiaKey(ga.clave)));
+  }
+  function abrirGuia(){
+    var ga = guiaActual(); if(!ga || !ga.g) return;
+    var g = ga.g, h = '';
+    lsSet(guiaKey(ga.clave), '1');
+    $('guideBtn').classList.remove('pulse');
+    h += '<div class="sh-ico" aria-hidden="true">' + g.ico + '</div>';
+    h += '<h3 id="sheetTitle">' + g.titulo + ' — ¿cómo se hace?</h3>';
+    h += '<p class="lead">' + g.lead + '</p>';
+    h += '<ol class="gsteps">';
+    g.pasos.forEach(function(p){ h += '<li><span class="n" aria-hidden="true">'+p[0]+'</span><div><b>'+p[1]+'</b><span class="d">'+p[2]+'</span></div></li>'; });
+    h += '</ol>';
+    if(g.extra){
+      var ocultos = (actual && actual.ocultarBiofeedback) || [];
+      var items = g.extra.filter(function(x){ return ocultos.indexOf(x[0]) < 0; });
+      h += '<h4>' + g.extraTitulo + '</h4><ol class="gsteps">';
+      items.forEach(function(x){ h += '<li><span class="n" aria-hidden="true">🎵</span><div><b>'+x[1]+'</b><span class="d">'+x[2]+'</span></div></li>'; });
+      h += '</ol>';
+    }
+    if(g.tips && g.tips.length){
+      h += '<div class="tips"><b>💚 Buenos consejos</b><ul>' + g.tips.map(function(t){ return '<li>'+t+'</li>'; }).join('') + '</ul></div>';
+    }
+    h += '<button class="btn ok-btn" id="sheetOk" type="button">¡Entendido, vamos!</button>';
+    $('sheet').innerHTML = h;
+    focoPrevio = document.activeElement;
+    $('sheetBack').classList.remove('hidden');
+    $('sheet').scrollTop = 0;
+    $('sheetOk').addEventListener('click', cerrarGuia);
+    $('sheetOk').focus({preventScroll:true});
+  }
+  function cerrarGuia(){
+    $('sheetBack').classList.add('hidden');
+    if(focoPrevio && focoPrevio.focus){ try{ focoPrevio.focus({preventScroll:true}); }catch(e){} }
+  }
+  function guiaAutomatica(){
+    var ga = guiaActual(); if(!ga || !ga.g) return;
+    if(tourActivo || tourPendiente || lsGet(guiaKey(ga.clave))) return;
+    var t = ++gtoken;
+    setTimeout(function(){ if(t === gtoken && !tourActivo && actual) abrirGuia(); }, 450);
+  }
+
+  /* ---------- Tour ---------- */
+  function visible(el){ return !!(el && el.getClientRects().length); }
+  function iniciarTour(){
+    if(!actual) return;
+    cerrarGuia(); gtoken++;
+    pasosTour = TOUR_PASOS.filter(function(s){ return !s.sel || visible(document.querySelector(s.sel)); });
+    ti = 0; tourActivo = true; focoPrevio = document.activeElement;
+    $('tourLayer').classList.remove('hidden');
+    dibujarTour();
+  }
+  function dibujarTour(){
+    var s = pasosTour[ti], n = pasosTour.length, ultimo = ti === n-1;
+    var dots = ''; for(var i=0;i<n;i++) dots += '<i class="'+(i===ti?'on':'')+'"></i>';
+    $('tTip').innerHTML =
+      '<div class="cnt">Paso ' + (ti+1) + ' de ' + n + '</div>' +
+      '<h3 id="tTitle">' + s.ico + ' ' + s.titulo() + '</h3>' +
+      '<p>' + s.texto + '</p>' +
+      '<div class="dots" aria-hidden="true">' + dots + '</div>' +
+      '<div class="tour-actions">' +
+        (ultimo ? '<span></span>' : '<button type="button" class="skip" id="tSkip">Saltar tour</button>') +
+        '<div class="go">' +
+          (ti > 0 ? '<button type="button" id="tPrev">← Atrás</button>' : '') +
+          '<button type="button" class="primary" id="tNext">' + (ultimo ? '¡Empezar!' : 'Siguiente →') + '</button>' +
+        '</div>' +
+      '</div>';
+    var sk = $('tSkip'); if(sk) sk.addEventListener('click', cerrarTour);
+    var pv = $('tPrev'); if(pv) pv.addEventListener('click', function(){ ti--; dibujarTour(); });
+    $('tNext').addEventListener('click', function(){ if(ultimo) cerrarTour(); else { ti++; dibujarTour(); } });
+    var el = s.sel ? document.querySelector(s.sel) : null;
+    if(el){
+      var tall = el.getBoundingClientRect().height > innerHeight * 0.5;
+      el.scrollIntoView({block: tall ? 'start' : 'center', inline:'nearest'});
+    }
+    posTour();
+    $('tNext').focus({preventScroll:true});
+  }
+  function posTour(){
+    if(!tourActivo) return;
+    var s = pasosTour[ti], el = s.sel ? document.querySelector(s.sel) : null;
+    var hole = $('tHole'), tip = $('tTip'), dim = $('tDim');
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var hx, hy, hw, hh;
+    tip.style.width = vw < 600 ? (vw - 24) + 'px' : '360px';
+    var tw = tip.offsetWidth, th = tip.offsetHeight, left, top;
+    if(el){
+      var r = el.getBoundingClientRect();
+      hx = r.left - 8; hy = r.top - 8; hw = r.width + 16; hh = Math.min(r.height, s.maxH || 99999) + 16;
+      hole.style.display = 'block'; dim.style.display = 'none';
+      hole.style.left = hx+'px'; hole.style.top = hy+'px'; hole.style.width = hw+'px'; hole.style.height = hh+'px';
+      left = Math.min(Math.max(12, hx + hw/2 - tw/2), vw - tw - 12);
+      top = hy + hh + 12;
+      if(top + th > vh - 12){ top = hy - th - 12; if(top < 12) top = vh - th - 12; }
+    } else {
+      hole.style.display = 'none'; dim.style.display = 'block';
+      left = (vw - tw)/2; top = (vh - th)/2;
+    }
+    tip.style.left = left + 'px'; tip.style.top = Math.max(12, top) + 'px';
+  }
+  function cerrarTour(){
+    if(!tourActivo) return;
+    tourActivo = false; tourPendiente = false;
+    $('tourLayer').classList.add('hidden');
+    if(actual) lsSet('paciente-tour-visto-'+actual.id, '1');
+    window.scrollTo({top:0});
+    if(focoPrevio && focoPrevio.focus){ try{ focoPrevio.focus({preventScroll:true}); }catch(e){} }
+    guiaAutomatica();
+  }
+  var rafPos = 0;
+  function reposTour(){ if(!tourActivo) return; cancelAnimationFrame(rafPos); rafPos = requestAnimationFrame(posTour); }
+  window.addEventListener('resize', reposTour);
+  window.addEventListener('scroll', reposTour, true);
+  document.addEventListener('keydown', function(e){
+    if(tourActivo){
+      if(e.key === 'Escape') cerrarTour();
+      else if(e.key === 'ArrowRight' && ti < pasosTour.length-1){ ti++; dibujarTour(); }
+      else if(e.key === 'ArrowLeft' && ti > 0){ ti--; dibujarTour(); }
+    } else if(e.key === 'Escape' && !$('sheetBack').classList.contains('hidden')){ cerrarGuia(); }
+  });
+  window.addEventListener('message', function(e){ // la rutina puede pedir abrir otra pestaña
+    var d = e.data; if(!d || !d.irA || !actual) return;
+    var i = lista.indexOf(d.irA); if(i < 0) i = lista.indexOf('biofeedbackLive'); if(i >= 0) ir(i);
+  });
+  $('helpBtn').addEventListener('click', iniciarTour);
+  $('guideBtn').addEventListener('click', abrirGuia);
+  $('sheetBack').addEventListener('click', function(e){ if(e.target === this) cerrarGuia(); });
+
+  // Mantiene la sesión si recarga la página
+  try{ var s = sessionStorage.getItem(SKEY); if(s) entrar(s); }catch(e){}
+})();
+</script>
+</body>
+</html>
